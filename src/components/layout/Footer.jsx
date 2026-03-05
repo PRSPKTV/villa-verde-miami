@@ -5,15 +5,23 @@ import { useGsapAnimation } from '@/hooks/useGsapAnimation';
 export default function Footer() {
   const footerRef = useGsapAnimation((el, gsap, ScrollTrigger) => {
     gsap.from(el.querySelectorAll('.footer-anim'), {
-      y: 40,
+      y: 30,
       opacity: 0,
       duration: 1,
       stagger: 0.1,
       ease: 'power3.out',
       scrollTrigger: {
         trigger: el,
-        start: 'top 85%',
+        start: 'top 95%',
       },
+      onComplete: () => {
+        gsap.set(el.querySelectorAll('.footer-anim'), { clearProps: 'opacity,transform' });
+      },
+    });
+
+    // Fallback: ensure footer is visible after a short delay regardless of scroll
+    gsap.delayedCall(1.5, () => {
+      gsap.set(el.querySelectorAll('.footer-anim'), { opacity: 1, y: 0 });
     });
   });
 
