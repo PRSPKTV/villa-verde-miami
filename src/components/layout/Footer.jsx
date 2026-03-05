@@ -49,7 +49,7 @@ export default function Footer() {
           <img
             src="https://villaverdemiami.com/wp-content/uploads/2025/03/WhatsApp_Image_2025-03-11_at_00.35.32_c1c8ffc1-removebg-preview.png"
             alt="Villa Verde logo"
-            className="h-[270px] w-auto drop-shadow-[0_0_12px_rgba(255,255,255,0.4)] -mt-4 mb-2"
+            className="h-[270px] w-auto drop-shadow-[0_0_12px_rgba(255,255,255,0.4)] -mt-4 mb-2 mx-auto md:mx-0"
           />
           <p className="font-body text-cream-200/70 max-w-sm mb-6">
             Little Havana's tranquil oasis. Luxury short-term rentals curated with tropical elegance in the heart of Miami.
