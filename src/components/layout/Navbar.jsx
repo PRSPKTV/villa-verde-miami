@@ -1,7 +1,6 @@
 import { useState } from 'react';
 import { Link, NavLink, useNavigate } from 'react-router-dom';
 import { Menu, X } from 'lucide-react';
-import { useScrollPosition } from '@/hooks/useScrollPosition';
 import { useAuth } from '@/context/AuthContext';
 import UserMenu from './UserMenu';
 
@@ -14,18 +13,13 @@ const navLinks = [
 ];
 
 export default function Navbar() {
-  const scrolled = useScrollPosition(50);
   const [mobileOpen, setMobileOpen] = useState(false);
   const { user, signOut } = useAuth();
   const navigate = useNavigate();
 
   return (
     <header
-      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${
-        scrolled
-          ? 'bg-surface/95 backdrop-blur-xl shadow-card border-b border-verde-100'
-          : 'bg-verde-900/50 backdrop-blur-sm'
-      }`}
+      className="fixed top-0 left-0 right-0 z-50 bg-surface/95 backdrop-blur-xl shadow-card border-b border-verde-100"
     >
       <nav className="max-w-7xl mx-auto px-4 md:px-8 h-16 md:h-20 flex items-center justify-between">
         {/* Left — Logo */}
@@ -35,9 +29,7 @@ export default function Navbar() {
             alt="Villa Verde logo"
             className="h-[62px] md:h-[69px] w-auto"
           />
-          <span className={`text-[26px] font-heading font-bold tracking-tight italic transition-colors duration-300 ${
-            scrolled ? 'text-verde-800' : 'text-cream-100'
-          }`}>
+          <span className="text-[26px] font-heading font-bold tracking-tight italic text-verde-800">
             Villa Verde
           </span>
         </Link>
@@ -50,9 +42,7 @@ export default function Navbar() {
               to={link.to}
               className={({ isActive }) =>
                 `relative py-1 transition-colors duration-200 ${
-                  scrolled
-                    ? isActive ? 'text-verde-800 font-semibold' : 'text-verde-600 hover:text-verde-800'
-                    : isActive ? 'text-gold-500' : 'text-cream-100/80 hover:text-cream-100'
+                  isActive ? 'text-verde-800 font-semibold' : 'text-verde-600 hover:text-verde-800'
                 }`
               }
             >
@@ -60,9 +50,7 @@ export default function Navbar() {
                 <>
                   {link.label}
                   {isActive && (
-                    <span className={`absolute -bottom-1 left-0 right-0 h-0.5 rounded-full ${
-                      scrolled ? 'bg-verde-500' : 'bg-gold-500'
-                    }`} />
+                    <span className="absolute -bottom-1 left-0 right-0 h-0.5 rounded-full bg-verde-500" />
                   )}
                 </>
               )}
@@ -74,25 +62,19 @@ export default function Navbar() {
         <div className="flex items-center gap-3">
           <Link
             to="/properties"
-            className={`relative overflow-hidden group px-5 py-2 rounded-full font-body font-semibold text-sm transition-all duration-300 hover:scale-[1.03] active:scale-95 hidden md:block ${
-              scrolled
-                ? 'bg-gold-500 text-verde-800'
-                : 'bg-gold-500/90 text-verde-800'
-            }`}
+            className="relative overflow-hidden group px-5 py-2 rounded-full font-body font-semibold text-sm transition-all duration-300 hover:scale-[1.03] active:scale-95 hidden md:block bg-gold-500 text-verde-800"
           >
             <span className="relative z-10">Book Now</span>
             <div className="absolute inset-0 bg-white/20 translate-y-full group-hover:translate-y-0 transition-transform duration-300 ease-in-out" />
           </Link>
 
           <div className="hidden md:block">
-            <UserMenu variant={scrolled ? 'light' : 'dark'} />
+            <UserMenu variant="light" />
           </div>
 
           <button
             onClick={() => setMobileOpen(!mobileOpen)}
-            className={`lg:hidden p-2 rounded-full transition-colors ${
-              scrolled ? 'text-verde-800 hover:bg-verde-50' : 'text-cream-100 hover:bg-cream-100/10'
-            }`}
+            className="lg:hidden p-2 rounded-full transition-colors text-verde-800 hover:bg-verde-50"
             aria-label="Toggle menu"
           >
             {mobileOpen ? <X size={22} /> : <Menu size={22} />}
