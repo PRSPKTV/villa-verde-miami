@@ -38,7 +38,7 @@ export default function Footer() {
       <div className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-4 gap-10 md:gap-8 border-t border-verde-400/20 pt-12 items-start footer-anim">
         <div className="md:col-span-2">
           <img
-            src="https://villaverdemiami.com/wp-content/uploads/2025/03/WhatsApp_Image_2025-03-11_at_00.35.32_c1c8ffc1-removebg-preview.png"
+            src="/images/villa-verde-logo.png"
             alt="Villa Verde logo"
             className="h-[270px] w-auto drop-shadow-[0_0_12px_rgba(255,255,255,0.4)] -mt-4 mb-2 mx-auto md:mx-0"
           />

@@ -31,7 +31,7 @@ export default function Navbar() {
         <nav className="max-w-7xl mx-auto px-4 md:px-8 h-16 md:h-20 flex items-center justify-between">
           <Link to="/" className="flex items-center gap-2.5 shrink-0 group">
             <img
-              src="https://villaverdemiami.com/wp-content/uploads/2025/03/WhatsApp_Image_2025-03-11_at_00.35.32_c1c8ffc1-removebg-preview.png"
+              src="/images/villa-verde-logo.png"
               alt="Villa Verde logo"
               className="h-[62px] md:h-[69px] w-auto"
             />
