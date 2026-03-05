@@ -357,4 +357,464 @@ export const blogPosts = [
       },
     ],
   },
+  {
+    slug: 'little-havana-welcome-guide',
+    title: 'Little Havana Welcome Guide',
+    category: 'Neighborhood',
+    date: '2026-03-05',
+    readTime: '4 min read',
+    image: '/images/little-havana-main.jpg',
+    excerpt: 'Little Havana is one of Miami\'s most historic, energetic neighborhoods — best enjoyed slowly: coffee in hand, music in the air, and a few great stops along Calle Ocho.',
+    content: [
+      {
+        type: 'paragraph',
+        text: 'Little Havana is one of Miami\'s most historic, energetic neighborhoods — best enjoyed slowly: coffee in hand, music in the air, and a few great stops along Calle Ocho.',
+      },
+      {
+        type: 'heading',
+        text: 'Lung Yai Thai Tapas (MICHELIN Bib Gourmand)',
+      },
+      {
+        type: 'paragraph',
+        text: 'Distance from the property: ~5-minute walk. A tiny, easy-to-miss spot on Calle Ocho that\'s become a destination for bold, authentic Thai flavors. It\'s recognized in the MICHELIN Guide (Bib Gourmand) for quality and value.',
+      },
+      {
+        type: 'heading',
+        text: 'Sanguich de Miami (MICHELIN Bib Gourmand)',
+      },
+      {
+        type: 'paragraph',
+        text: 'Distance from the property: ~5\u201310-minute drive. A Little Havana favorite specializing in pressed Cuban sandwiches with a serious following — and a MICHELIN Bib Gourmand nod. Great for a quick, iconic Miami bite.',
+      },
+      {
+        type: 'heading',
+        text: 'Versailles Restaurant (Little Havana Landmark)',
+      },
+      {
+        type: 'paragraph',
+        text: 'Distance from the property: ~5\u201310-minute drive. A Miami institution serving Cuban classics since 1971 — part restaurant, part cultural landmark, and a go-to for a true Little Havana experience.',
+      },
+      {
+        type: 'heading',
+        text: 'Caf\u00e9 La Trova (Live Music + Cantinero Cocktails)',
+      },
+      {
+        type: 'paragraph',
+        text: 'Distance from the property: ~5\u201310-minute drive. A Little Havana bar/restaurant known for Cuban cantinero-style cocktails and live music — an excellent night-out option when you want atmosphere with your drink.',
+      },
+    ],
+  },
+  {
+    slug: 'neighborhoods-worth-exploring',
+    title: 'Neighborhoods Worth Exploring',
+    category: 'Explore Miami',
+    date: '2026-03-05',
+    readTime: '5 min read',
+    image: 'https://images.unsplash.com/photo-1533106497176-45ae19e68ba2?w=1200&q=80',
+    excerpt: 'If you like exploring by neighborhood — coffee stops, art, good meals, and walking around — these are the zones we recommend.',
+    content: [
+      {
+        type: 'paragraph',
+        text: 'If you like exploring by neighborhood — coffee stops, art, good meals, and walking around — these are the zones we recommend.',
+      },
+      {
+        type: 'heading',
+        text: 'Little Havana (Where You\'re Staying)',
+      },
+      {
+        type: 'paragraph',
+        text: 'Distance from the property: You\'re in it (walkable). Calle Ocho is the heart of it: lively, historic, and full of local flavor.',
+      },
+      {
+        type: 'heading',
+        text: 'Wynwood (Street Art + Caf\u00e9s + Breweries)',
+      },
+      {
+        type: 'paragraph',
+        text: 'Distance from the property: ~15\u201320-minute drive. Miami\'s most famous mural neighborhood. Great for wandering, photos, and pairing art walks with breweries and casual bites. For a "centerpiece" stop, check out Wynwood Walls.',
+      },
+      {
+        type: 'heading',
+        text: 'Coconut Grove (Leafy, Laid-Back, Near the Bay)',
+      },
+      {
+        type: 'paragraph',
+        text: 'Distance from the property: ~15\u201320-minute drive. A slower-paced Miami neighborhood with a relaxed, coastal feel — great for strolling, caf\u00e9-hopping, and weekend markets.',
+      },
+      {
+        type: 'heading',
+        text: 'Coral Gables (Architecture + Polished Dining)',
+      },
+      {
+        type: 'paragraph',
+        text: 'Distance from the property: ~15\u201320-minute drive. Tree-lined streets and classic Mediterranean/Spanish-style architecture. A calmer, more "European" feeling part of the city.',
+      },
+      {
+        type: 'heading',
+        text: 'Design District (Luxury + Modern Architecture + Contemporary Art)',
+      },
+      {
+        type: 'paragraph',
+        text: 'Distance from the property: ~20\u201325-minute drive. High-end shopping and galleries — best paired with ICA Miami (free admission) for an easy art-focused outing.',
+      },
+      {
+        type: 'heading',
+        text: 'Lincoln Road (South Beach Walk + People-Watching)',
+      },
+      {
+        type: 'paragraph',
+        text: 'Distance from the property: ~20\u201330-minute drive. A pedestrian strip with shops and caf\u00e9s — fun for an afternoon walk if you\'re already headed to Miami Beach.',
+      },
+      {
+        type: 'heading',
+        text: 'Brickell (Downtown Energy + Nightlife)',
+      },
+      {
+        type: 'paragraph',
+        text: 'Distance from the property: ~10\u201312-minute drive (about 3 miles). Brickell is Miami\'s modern downtown and financial district, known for its skyline, restaurants, and nightlife. Two areas in particular are worth visiting: Mary Brickell Village, a lively outdoor dining and nightlife district, and Brickell City Centre, a modern open-air shopping and dining complex with striking contemporary architecture, home to Saks Fifth Avenue and Casa Tua Cucina.',
+      },
+    ],
+  },
+  {
+    slug: 'best-miami-beaches',
+    title: 'Beaches We Recommend',
+    category: 'Beaches',
+    date: '2026-03-05',
+    readTime: '4 min read',
+    image: 'https://images.unsplash.com/photo-1507525428034-b723cf961d3e?w=1200&q=80',
+    excerpt: 'Miami beaches can feel totally different depending on where you go — here are the calmer, prettier spots we usually point guests toward.',
+    content: [
+      {
+        type: 'paragraph',
+        text: 'Miami beaches can feel totally different depending on where you go — here are the vibes we usually point guests toward.',
+      },
+      {
+        type: 'heading',
+        text: 'South Beach: "South of Fifth" (SoFi)',
+      },
+      {
+        type: 'paragraph',
+        text: 'Distance from the property: ~20\u201330-minute drive. South Pointe / SoFi tends to feel calmer and more local than the middle of South Beach, and it\'s great for a walk along the water.',
+      },
+      {
+        type: 'heading',
+        text: 'Key Biscayne: Crandon Park Beach',
+      },
+      {
+        type: 'paragraph',
+        text: 'Distance from the property: ~20\u201330-minute drive. One of the best "relaxed beach day" spots: calmer water, lots of space, and picnic areas with tables/grills — easy to make a full afternoon out of it.',
+      },
+      {
+        type: 'heading',
+        text: 'Key Biscayne: Bill Baggs Cape Florida State Park',
+      },
+      {
+        type: 'paragraph',
+        text: 'Distance from the property: ~25\u201335-minute drive. A quieter, more scenic beach day with nature vibes (and the lighthouse). Great when you want to get away from crowds.',
+      },
+      {
+        type: 'heading',
+        text: 'Virginia Key Beach',
+      },
+      {
+        type: 'paragraph',
+        text: 'Distance from the property: ~15\u201325-minute drive. A more local-feeling option that\'s often a good "easy beach day" alternative.',
+      },
+    ],
+  },
+  {
+    slug: 'culture-hidden-gems-miami',
+    title: 'Culture + Hidden Gems',
+    category: 'Culture',
+    date: '2026-03-05',
+    readTime: '5 min read',
+    image: 'https://images.unsplash.com/photo-1506477331477-33d5d8b3dc85?w=1200&q=80',
+    excerpt: 'Museums, gardens, and slow-paced spots — these are the places we recommend when guests want a calmer day that still feels very "Miami."',
+    content: [
+      {
+        type: 'paragraph',
+        text: 'These are the places we recommend when guests want a calmer day that still feels very "Miami."',
+      },
+      {
+        type: 'heading',
+        text: 'Vizcaya Museum & Gardens',
+      },
+      {
+        type: 'paragraph',
+        text: 'Distance from the property: ~10\u201320-minute drive. A historic bayfront estate built in the early 1900s, known for its architecture, interiors, and famously beautiful formal gardens.',
+      },
+      {
+        type: 'heading',
+        text: 'Fairchild Tropical Botanic Garden',
+      },
+      {
+        type: 'paragraph',
+        text: 'Distance from the property: ~20\u201330-minute drive. A lush botanic garden experience with tropical collections and easy walking paths — perfect for a peaceful reset day.',
+      },
+      {
+        type: 'heading',
+        text: 'Rubell Museum (Allapattah)',
+      },
+      {
+        type: 'paragraph',
+        text: 'Distance from the property: ~15\u201325-minute drive. A major contemporary art museum set inside transformed warehouse spaces, with dozens of galleries plus a bookstore/courtyard — great if you want a substantial museum visit.',
+      },
+      {
+        type: 'heading',
+        text: 'ICA Miami (Institute of Contemporary Art) \u2014 Free Admission',
+      },
+      {
+        type: 'paragraph',
+        text: 'Distance from the property: ~20\u201325-minute drive. A contemporary museum in the Design District with free entry (reserve ahead when possible). Easy to pair with Design District walking/shopping.',
+      },
+      {
+        type: 'heading',
+        text: 'Wynwood Walls',
+      },
+      {
+        type: 'paragraph',
+        text: 'Distance from the property: ~15\u201320-minute drive. The iconic open-air street art destination in Wynwood, known for curated large-scale murals and rotating works.',
+      },
+      {
+        type: 'heading',
+        text: 'Books & Books (Coral Gables) + Caf\u00e9',
+      },
+      {
+        type: 'paragraph',
+        text: 'Distance from the property: ~15\u201325-minute drive. A classic independent bookstore with a charming caf\u00e9 atmosphere — great for a slower afternoon, coffee, and browsing.',
+      },
+      {
+        type: 'heading',
+        text: 'Coconut Grove Organic Farmers Market (Saturdays)',
+      },
+      {
+        type: 'paragraph',
+        text: 'Distance from the property: ~15\u201325-minute drive. A longstanding Saturday market (Glaser Farms) with organic produce and a relaxed neighborhood feel.',
+      },
+    ],
+  },
+  {
+    slug: 'restaurants-we-recommend',
+    title: 'Restaurants We Recommend',
+    category: 'Food & Drink',
+    date: '2026-03-05',
+    readTime: '5 min read',
+    image: 'https://images.unsplash.com/photo-1414235077428-338989a2e8c0?w=1200&q=80',
+    excerpt: 'A mix of Little Havana staples and a few "worth it" spots around the city — mostly local favorites.',
+    content: [
+      {
+        type: 'paragraph',
+        text: 'A mix of Little Havana staples + a few "worth it" spots around the city.',
+      },
+      {
+        type: 'heading',
+        text: 'Walkable / Very Close',
+      },
+      {
+        type: 'paragraph',
+        text: 'Lung Yai Thai Tapas (MICHELIN Bib Gourmand) \u2014 ~5-minute walk. Small, intimate, and MICHELIN-recognized — one of the best "close to home" meals you can do.',
+      },
+      {
+        type: 'paragraph',
+        text: 'Sanguich de Miami (MICHELIN Bib Gourmand) \u2014 ~5\u201310-minute drive. Pressed Cuban sandwiches with serious attention to detail and a MICHELIN Bib Gourmand mention — easy win.',
+      },
+      {
+        type: 'heading',
+        text: 'Little Havana Classics',
+      },
+      {
+        type: 'paragraph',
+        text: 'Versailles \u2014 ~5\u201310-minute drive. A Little Havana landmark for Cuban food and the "classic Miami Cuban restaurant" experience.',
+      },
+      {
+        type: 'paragraph',
+        text: 'Caf\u00e9 La Trova \u2014 ~5\u201310-minute drive. Dinner + cocktails + live music in one place, led by a highly regarded bar team and Cuban culture focus.',
+      },
+      {
+        type: 'heading',
+        text: 'Pizza',
+      },
+      {
+        type: 'paragraph',
+        text: 'Mister O1 (Brickell / other locations) \u2014 ~10\u201320-minute drive. Known for "extraordinary pizza" built on precision and high-quality ingredients — great when you want something fun and reliably good.',
+      },
+      {
+        type: 'heading',
+        text: '"Bougie But Worth It"',
+      },
+      {
+        type: 'paragraph',
+        text: 'Casa Tua Cucina (Brickell City Centre) \u2014 ~10\u201315-minute drive. A lively, multi-concept Italian dining experience inside Brickell City Centre — great ambiance, lots of options, and excellent for groups.',
+      },
+    ],
+  },
+  {
+    slug: 'wine-bars-breweries-miami',
+    title: 'Wine Bars + Breweries',
+    category: 'Nightlife',
+    date: '2026-03-05',
+    readTime: '4 min read',
+    image: 'https://images.unsplash.com/photo-1510812431401-41d2bd2722f3?w=1200&q=80',
+    excerpt: 'Good vibes, not too formal — our picks for wine bars and craft breweries around Miami.',
+    content: [
+      {
+        type: 'paragraph',
+        text: 'Whether you\'re in the mood for a laid-back wine garden or a taproom with Latin flair, these are our favorite spots.',
+      },
+      {
+        type: 'heading',
+        text: 'Wine / Night Atmosphere',
+      },
+      {
+        type: 'paragraph',
+        text: 'El Carajo (tapas + wine shop inside a gas station) \u2014 ~10\u201315-minute drive. A classic Miami "hidden in plain sight" spot: tapas plus a serious wine selection — famously quirky, and you can choose bottles from their inventory and have them opened for a fee.',
+      },
+      {
+        type: 'paragraph',
+        text: 'Lagniappe (wine garden + live music nightly) \u2014 ~20\u201325-minute drive. A laid-back wine bar with a backyard-garden feel and live music every night — one of the best "chill evening" spots in Miami.',
+      },
+      {
+        type: 'heading',
+        text: 'Breweries',
+      },
+      {
+        type: 'paragraph',
+        text: 'Wynwood Brewing Company \u2014 ~15\u201320-minute drive. A staple in the Wynwood Art District and widely described as Miami\'s first craft production brewery — good stop when you\'re already doing murals/art walks.',
+      },
+      {
+        type: 'paragraph',
+        text: 'Veza Sur Brewing Co. \u2014 ~15\u201320-minute drive. A Miami-born brewery with Latin American roots, known for a lively taproom vibe and a broad range of approachable craft styles.',
+      },
+      {
+        type: 'paragraph',
+        text: 'The Tank Brewing Co. (Doral) \u2014 ~20\u201330-minute drive. A Doral taproom with a steady lineup and rotating releases — often highlighted for its range and local identity (e.g., "Freedom Tower" amber).',
+      },
+    ],
+  },
+  {
+    slug: 'grocery-essentials-guide',
+    title: 'Near the House: Grocery + Essentials',
+    category: 'Guest Guide',
+    date: '2026-03-05',
+    readTime: '2 min read',
+    image: 'https://images.unsplash.com/photo-1542838132-92c53300491e?w=1200&q=80',
+    excerpt: 'Quick essentials and grocery stores within a short drive of the property — everything you need to stock up.',
+    content: [
+      {
+        type: 'paragraph',
+        text: 'Everything you need is within a short drive. Here\'s where to grab essentials and groceries near the house.',
+      },
+      {
+        type: 'heading',
+        text: 'Quick Essentials',
+      },
+      {
+        type: 'paragraph',
+        text: 'CVS Pharmacy \u2014 ~5\u201310-minute drive. Best for quick household basics, toiletries, and last-minute needs.',
+      },
+      {
+        type: 'heading',
+        text: 'Grocery Stores',
+      },
+      {
+        type: 'paragraph',
+        text: 'Publix (Altos Plaza) \u2014 ~5\u201310-minute drive. Clean, consistent quality, and an easy "grab everything" option. Great for snacks and simple meals.',
+      },
+      {
+        type: 'paragraph',
+        text: 'Presidente Supermarket (Little Havana area) \u2014 ~5\u201310-minute drive. A neighborhood favorite for Latin staples, produce, and everyday groceries.',
+      },
+      {
+        type: 'paragraph',
+        text: 'Los Pinare\u00f1os Fruter\u00eda \u2014 ~5\u201310-minute drive. Open-air fruit/produce market energy — great for fresh items and a very "Miami" local feel.',
+      },
+    ],
+  },
+  {
+    slug: 'miami-shopping-guide',
+    title: 'World-Class Shopping in Miami',
+    category: 'Shopping',
+    date: '2026-03-05',
+    readTime: '6 min read',
+    image: 'https://images.unsplash.com/photo-1441986300917-64674bd600d8?w=1200&q=80',
+    excerpt: 'Luxury boutiques, massive malls, and unique shopping districts — Miami is one of the best shopping cities in the United States.',
+    content: [
+      {
+        type: 'paragraph',
+        text: 'Miami is one of the best shopping cities in the United States. Whether you\'re looking for luxury designer boutiques, major department stores, or outlet deals, there are several excellent areas worth visiting.',
+      },
+      {
+        type: 'heading',
+        text: 'Bal Harbour Shops',
+      },
+      {
+        type: 'paragraph',
+        text: 'Distance from the property: ~30-minute drive (13 miles). One of the most famous luxury shopping centers in the world. The open-air mall is known for its lush tropical landscaping and a curated collection of high-end fashion houses — Chanel, Gucci, Prada, Saint Laurent, Valentino, Balenciaga, and Bottega Veneta, along with Neiman Marcus and Saks Fifth Avenue.',
+      },
+      {
+        type: 'heading',
+        text: 'Dolphin Mall',
+      },
+      {
+        type: 'paragraph',
+        text: 'Distance from the property: ~20-minute drive (12 miles). One of Miami\'s most popular outlet-style shopping centers with a wide variety of stores — Nike, Adidas, Levi\'s, Michael Kors, Coach, and Polo Ralph Lauren, along with restaurants, entertainment, and a movie theater.',
+      },
+      {
+        type: 'heading',
+        text: 'Aventura Mall',
+      },
+      {
+        type: 'paragraph',
+        text: 'Distance from the property: ~35-minute drive (18 miles). One of the largest and most impressive shopping malls in the United States. Combines luxury boutiques and mainstream brands — Louis Vuitton, Herm\u00e8s, Cartier, Rolex, Apple, Zara, and Nordstrom. Also known for its contemporary art installations and sculptures.',
+      },
+      {
+        type: 'heading',
+        text: 'Sawgrass Mills',
+      },
+      {
+        type: 'paragraph',
+        text: 'Distance from the property: ~45-minute drive (30 miles). The largest outlet shopping mall in the United States. Features hundreds of stores including luxury outlets — Prada, Gucci, Burberry, and Versace — along with popular brands like Nike, Adidas, and Under Armour.',
+      },
+      {
+        type: 'heading',
+        text: 'Miami Design District',
+      },
+      {
+        type: 'paragraph',
+        text: 'Distance from the property: ~15-minute drive (6 miles). Miami\'s premier destination for luxury fashion, architecture, and art. Flagship stores from Louis Vuitton, Dior, Herm\u00e8s, Cartier, Prada, Fendi, and Givenchy, alongside contemporary art galleries and striking modern architecture.',
+      },
+      {
+        type: 'heading',
+        text: 'Brickell City Centre',
+      },
+      {
+        type: 'paragraph',
+        text: 'Distance from the property: ~10-minute drive (3 miles). A modern open-air shopping complex in Miami\'s financial district. Features high-end boutiques, contemporary fashion stores, restaurants, and Saks Fifth Avenue. The unique Climate Ribbon canopy provides shade and airflow through the complex.',
+      },
+      {
+        type: 'heading',
+        text: 'Dadeland Mall',
+      },
+      {
+        type: 'paragraph',
+        text: 'Distance from the property: ~20-minute drive (10 miles). One of Miami\'s most established shopping destinations with a strong mix of luxury and mid-range brands. Anchored by Macy\'s and Nordstrom, with stores like Apple, Zara, Coach, and Sephora.',
+      },
+      {
+        type: 'heading',
+        text: 'The Falls',
+      },
+      {
+        type: 'paragraph',
+        text: 'Distance from the property: ~25-minute drive (13 miles). An open-air shopping center known for its relaxed atmosphere and tropical landscaping. A long water feature runs through the center, creating a peaceful environment for walking between shops and restaurants.',
+      },
+      {
+        type: 'heading',
+        text: 'Quick Shopping Tips',
+      },
+      {
+        type: 'paragraph',
+        text: 'Luxury Shopping: Bal Harbour Shops or Design District. High-End + Variety: Aventura Mall. Discount / Outlet Deals: Dolphin Mall or Sawgrass Mills. Close to the property: Brickell City Centre. Traditional Mall: Dadeland Mall. Relaxed Outdoor Shopping: The Falls.',
+      },
+    ],
+  },
 ];
