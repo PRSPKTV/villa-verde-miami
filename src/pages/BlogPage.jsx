@@ -1,11 +1,15 @@
-import { PenLine, ArrowRight, Calendar, Clock } from 'lucide-react';
+import { useState } from 'react';
+import { PenLine, ArrowRight, Calendar, Clock, Loader2, CheckCircle } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import { blogPosts } from '@/data/blog';
 import { format, parseISO } from 'date-fns';
+import { subscribeNewsletter } from '@/lib/api';
 
 export default function BlogPage() {
   const featured = blogPosts[0];
   const rest = blogPosts.slice(1);
+  const [nlEmail, setNlEmail] = useState('');
+  const [nlStatus, setNlStatus] = useState('idle'); // idle | sending | done | error
 
   return (
     <div className="pt-28 pb-20 px-4 md:px-8">
@@ -99,16 +103,44 @@ export default function BlogPage() {
         <p className="text-text-secondary font-body mb-6">
           Get travel guides, neighborhood tips, and exclusive offers delivered to your inbox.
         </p>
-        <div className="flex gap-3 max-w-md mx-auto">
-          <input
-            type="email"
-            placeholder="your@email.com"
-            className="flex-1 px-4 py-3 rounded-xl border border-verde-200 bg-surface font-body text-sm focus:outline-none focus:ring-2 focus:ring-verde-400"
-          />
-          <button className="bg-gold-500 text-verde-800 px-6 py-3 rounded-xl font-body font-semibold flex items-center gap-2 hover:bg-gold-400 transition-colors shrink-0">
-            Subscribe <ArrowRight size={14} />
-          </button>
-        </div>
+        {nlStatus === 'done' ? (
+          <div className="flex items-center justify-center gap-2 text-verde-600 font-body font-semibold">
+            <CheckCircle size={18} /> You're subscribed!
+          </div>
+        ) : (
+          <form
+            onSubmit={async (e) => {
+              e.preventDefault();
+              setNlStatus('sending');
+              try {
+                await subscribeNewsletter(nlEmail);
+                setNlStatus('done');
+              } catch {
+                setNlStatus('error');
+              }
+            }}
+            className="flex gap-3 max-w-md mx-auto"
+          >
+            <input
+              type="email"
+              required
+              value={nlEmail}
+              onChange={(e) => setNlEmail(e.target.value)}
+              placeholder="your@email.com"
+              className="flex-1 px-4 py-3 rounded-xl border border-verde-200 bg-surface font-body text-sm focus:outline-none focus:ring-2 focus:ring-verde-400"
+            />
+            <button
+              type="submit"
+              disabled={nlStatus === 'sending'}
+              className="bg-gold-500 text-verde-800 px-6 py-3 rounded-xl font-body font-semibold flex items-center gap-2 hover:bg-gold-400 transition-colors shrink-0 disabled:opacity-60"
+            >
+              {nlStatus === 'sending' ? <><Loader2 size={14} className="animate-spin" /> Sending</> : <>Subscribe <ArrowRight size={14} /></>}
+            </button>
+          </form>
+        )}
+        {nlStatus === 'error' && (
+          <p className="text-red-600 font-body text-sm mt-3">Something went wrong. Please try again.</p>
+        )}
       </div>
     </div>
   );

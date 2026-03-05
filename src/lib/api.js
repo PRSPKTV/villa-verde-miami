@@ -41,6 +41,14 @@ export async function getAvailability(slug) {
   return data.blockedDates;
 }
 
+export async function sendContactMessage({ name, email, subject, message }) {
+  return supabaseFunction('send-contact', { name, email, subject, message });
+}
+
+export async function subscribeNewsletter(email) {
+  return supabaseFunction('subscribe-newsletter', { email });
+}
+
 export async function syncCalendar(slug) {
   const url = slug
     ? `${SUPABASE_URL}/functions/v1/sync-calendar?slug=${encodeURIComponent(slug)}`

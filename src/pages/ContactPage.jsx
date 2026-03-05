@@ -1,9 +1,12 @@
 import { useState } from 'react';
 import { useGsapAnimation } from '@/hooks/useGsapAnimation';
-import { MapPin, Phone, Mail, Clock, Send, CheckCircle } from 'lucide-react';
+import { MapPin, Phone, Mail, Clock, Send, CheckCircle, Loader2 } from 'lucide-react';
+import { sendContactMessage } from '@/lib/api';
 
 export default function ContactPage() {
   const [submitted, setSubmitted] = useState(false);
+  const [sending, setSending] = useState(false);
+  const [error, setError] = useState('');
   const [form, setForm] = useState({ name: '', email: '', subject: '', message: '' });
 
   const heroRef = useGsapAnimation((el, gsap) => {
@@ -12,9 +15,18 @@ export default function ContactPage() {
     });
   });
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    setSubmitted(true);
+    setSending(true);
+    setError('');
+    try {
+      await sendContactMessage(form);
+      setSubmitted(true);
+    } catch (err) {
+      setError('Failed to send message. Please try again or email us directly.');
+    } finally {
+      setSending(false);
+    }
   };
 
   const inputClasses = 'w-full px-4 py-3 rounded-xl border border-verde-200 bg-cream-50 font-body text-sm focus:outline-none focus:ring-2 focus:ring-verde-400 focus:border-transparent transition-all';
@@ -72,11 +84,15 @@ export default function ContactPage() {
                 <label className="block text-sm font-body font-medium text-verde-700 mb-1.5">Message</label>
                 <textarea required rows={5} value={form.message} onChange={e => setForm({ ...form, message: e.target.value })} className={inputClasses} placeholder="How can we help?" />
               </div>
+              {error && (
+                <p className="text-red-600 font-body text-sm">{error}</p>
+              )}
               <button
                 type="submit"
-                className="w-full bg-gold-500 text-verde-800 py-3 rounded-xl font-body font-semibold flex items-center justify-center gap-2 hover:bg-gold-400 transition-colors"
+                disabled={sending}
+                className="w-full bg-gold-500 text-verde-800 py-3 rounded-xl font-body font-semibold flex items-center justify-center gap-2 hover:bg-gold-400 transition-colors disabled:opacity-60"
               >
-                <Send size={16} /> Send Message
+                {sending ? <><Loader2 size={16} className="animate-spin" /> Sending...</> : <><Send size={16} /> Send Message</>}
               </button>
             </form>
           )}
