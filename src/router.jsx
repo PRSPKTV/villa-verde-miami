@@ -1,0 +1,31 @@
+import { createBrowserRouter } from 'react-router-dom';
+import Layout from '@/components/layout/Layout';
+import HomePage from '@/pages/HomePage';
+import PropertiesPage from '@/pages/PropertiesPage';
+import PropertyDetailPage from '@/pages/PropertyDetailPage';
+import AboutPage from '@/pages/AboutPage';
+import FAQPage from '@/pages/FAQPage';
+import ContactPage from '@/pages/ContactPage';
+import BookingConfirmationPage from '@/pages/BookingConfirmationPage';
+import CheckoutPage from '@/pages/CheckoutPage';
+import BlogPage from '@/pages/BlogPage';
+import NotFoundPage from '@/pages/NotFoundPage';
+
+export const router = createBrowserRouter([
+  {
+    path: '/',
+    element: <Layout />,
+    children: [
+      { index: true, element: <HomePage /> },
+      { path: 'properties', element: <PropertiesPage /> },
+      { path: 'properties/:slug', element: <PropertyDetailPage /> },
+      { path: 'about', element: <AboutPage /> },
+      { path: 'faq', element: <FAQPage /> },
+      { path: 'contact', element: <ContactPage /> },
+      { path: 'blog', element: <BlogPage /> },
+      { path: 'booking/checkout', element: <CheckoutPage /> },
+      { path: 'booking/confirmation', element: <BookingConfirmationPage /> },
+      { path: '*', element: <NotFoundPage /> },
+    ],
+  },
+]);
