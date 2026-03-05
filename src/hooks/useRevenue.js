@@ -40,7 +40,7 @@ export default function useRevenue(dateRange, propertySlug = null) {
         // ── Current-period bookings ───────────────────────────────
         let bookingsQuery = supabase
           .from('bookings')
-          .select('id, total, nightly_rate, nights, check_in, property_id, properties(name)')
+          .select('id, total, nightly_rate, nights, check_in, property_slug, property_name')
           .eq('status', 'confirmed')
           .gte('check_in', dateRange.start)
           .lte('check_in', dateRange.end);
@@ -55,7 +55,7 @@ export default function useRevenue(dateRange, propertySlug = null) {
         // ── Blocked days (for occupancy) ─────────────────────────
         let blockedQuery = supabase
           .from('calendar_availability')
-          .select('date, property_id')
+          .select('date, property_slug')
           .eq('is_blocked', true)
           .gte('date', dateRange.start)
           .lte('date', dateRange.end);
@@ -73,7 +73,7 @@ export default function useRevenue(dateRange, propertySlug = null) {
 
         let prevQuery = supabase
           .from('bookings')
-          .select('id, total, nightly_rate, nights, check_in, property_id, properties(name)')
+          .select('id, total, nightly_rate, nights, check_in, property_slug, property_name')
           .eq('status', 'confirmed')
           .gte('check_in', prevStart)
           .lte('check_in', prevEnd);
@@ -127,7 +127,7 @@ export default function useRevenue(dateRange, propertySlug = null) {
         // ── By-property breakdown ────────────────────────────────
         const propMap = {};
         bookings.forEach((b) => {
-          const name = b.properties?.name || 'Unknown';
+          const name = b.property_name || 'Unknown';
           if (!propMap[name]) propMap[name] = 0;
           propMap[name] += (b.total || 0) / 100;
         });
