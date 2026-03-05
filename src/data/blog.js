@@ -5,7 +5,7 @@ export const blogPosts = [
     category: 'Neighborhood',
     date: '2026-02-15',
     readTime: '8 min read',
-    image: 'https://images.unsplash.com/photo-1547995886-6dc09384c6e6?w=1200&q=80',
+    image: 'https://images.unsplash.com/photo-1535498730771-e735b998cd64?w=1200&q=80',
     excerpt: 'Discover the hidden gems, best restaurants, and cultural experiences that make Little Havana one of Miami\'s most beloved neighborhoods.',
     content: [
       {
