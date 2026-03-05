@@ -1,35 +1,22 @@
-import { useGsapAnimation } from '@/hooks/useGsapAnimation';
 import { PenLine, ArrowRight, Calendar, Clock } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import { blogPosts } from '@/data/blog';
 import { format, parseISO } from 'date-fns';
 
 export default function BlogPage() {
-  const heroRef = useGsapAnimation((el, gsap) => {
-    gsap.from(el.querySelectorAll('.blog-anim'), {
-      y: 30, opacity: 0, duration: 1, stagger: 0.15, ease: 'power3.out', delay: 0.2,
-    });
-  });
-
-  const gridRef = useGsapAnimation((el, gsap) => {
-    gsap.from(el.querySelectorAll('.blog-card'), {
-      y: 30, opacity: 0, duration: 0.8, stagger: 0.1, ease: 'power3.out', delay: 0.4,
-    });
-  });
-
   const featured = blogPosts[0];
   const rest = blogPosts.slice(1);
 
   return (
     <div className="pt-28 pb-20 px-4 md:px-8">
-      <div ref={heroRef} className="max-w-4xl mx-auto mb-16 text-center">
-        <div className="blog-anim inline-flex items-center gap-2 bg-verde-50 text-verde-700 px-4 py-1.5 rounded-full font-data text-xs uppercase tracking-widest mb-6">
+      <div className="max-w-4xl mx-auto mb-16 text-center">
+        <div className="inline-flex items-center gap-2 bg-verde-50 text-verde-700 px-4 py-1.5 rounded-full font-data text-xs uppercase tracking-widest mb-6">
           <PenLine size={12} /> Stories & Guides
         </div>
-        <h1 className="blog-anim font-heading text-4xl md:text-5xl font-bold text-verde-800 mb-4">
+        <h1 className="font-heading text-4xl md:text-5xl font-bold text-verde-800 mb-4">
           The Villa Verde Blog
         </h1>
-        <p className="blog-anim text-text-secondary font-body text-lg max-w-2xl mx-auto">
+        <p className="text-text-secondary font-body text-lg max-w-2xl mx-auto">
           Stories, guides, and insider tips for experiencing the best of Little Havana and Miami.
         </p>
       </div>
@@ -37,7 +24,7 @@ export default function BlogPage() {
       {/* Featured Post */}
       <Link
         to={`/blog/${featured.slug}`}
-        className="blog-anim block max-w-6xl mx-auto mb-12 group"
+        className="block max-w-6xl mx-auto mb-12 group"
       >
         <div className="bg-surface rounded-3xl border border-verde-100 overflow-hidden shadow-card md:flex">
           <div className="relative md:w-1/2 h-64 md:h-auto overflow-hidden">
@@ -73,12 +60,12 @@ export default function BlogPage() {
       </Link>
 
       {/* Post Grid */}
-      <div ref={gridRef} className="max-w-6xl mx-auto grid md:grid-cols-3 gap-8 mb-16">
+      <div className="max-w-6xl mx-auto grid md:grid-cols-3 gap-8 mb-16">
         {rest.map(post => (
           <Link
             key={post.slug}
             to={`/blog/${post.slug}`}
-            className="blog-card group bg-surface rounded-3xl border border-verde-100 overflow-hidden shadow-card hover:shadow-elevated transition-all"
+            className="group bg-surface rounded-3xl border border-verde-100 overflow-hidden shadow-card hover:shadow-elevated transition-all"
           >
             <div className="relative h-48 overflow-hidden">
               <img src={post.image} alt={post.title} className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" />
