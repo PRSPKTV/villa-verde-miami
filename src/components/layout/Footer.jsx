@@ -79,6 +79,9 @@ export default function Footer() {
             <a href="https://www.facebook.com/share/14aq5WKrdB/" target="_blank" rel="noopener noreferrer" className="text-cream-200/50 hover:text-gold-500 transition-colors" aria-label="Facebook">
               <Facebook size={20} />
             </a>
+            <a href="https://www.tiktok.com/@villaverdemiami" target="_blank" rel="noopener noreferrer" className="text-cream-200/50 hover:text-gold-500 transition-colors" aria-label="TikTok">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M9 12a4 4 0 1 0 4 4V4a5 5 0 0 0 5 5" /></svg>
+            </a>
           </div>
         </div>
       </div>

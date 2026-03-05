@@ -1,7 +1,8 @@
 import { useState } from 'react';
-import { Link, NavLink } from 'react-router-dom';
+import { Link, NavLink, useNavigate } from 'react-router-dom';
 import { Menu, X } from 'lucide-react';
 import { useScrollPosition } from '@/hooks/useScrollPosition';
+import { useAuth } from '@/context/AuthContext';
 import UserMenu from './UserMenu';
 
 const navLinks = [
@@ -15,6 +16,8 @@ const navLinks = [
 export default function Navbar() {
   const scrolled = useScrollPosition(50);
   const [mobileOpen, setMobileOpen] = useState(false);
+  const { user, signOut } = useAuth();
+  const navigate = useNavigate();
 
   return (
     <header
@@ -118,13 +121,27 @@ export default function Navbar() {
               </NavLink>
             ))}
             <div className="mt-4 pt-4 border-t border-verde-100 flex flex-col gap-2">
-              <Link
-                to="/contact"
-                onClick={() => setMobileOpen(false)}
-                className="text-base font-body text-verde-700 px-4 py-3 rounded-xl hover:bg-cream-50"
-              >
-                Log In
-              </Link>
+              {user ? (
+                <>
+                  <div className="px-4 py-2 text-sm font-body text-text-muted">
+                    Signed in as {user.user_metadata?.full_name || user.email}
+                  </div>
+                  <button
+                    onClick={() => { signOut(); setMobileOpen(false); navigate('/'); }}
+                    className="text-base font-body text-red-600 px-4 py-3 rounded-xl hover:bg-red-50 text-left"
+                  >
+                    Sign Out
+                  </button>
+                </>
+              ) : (
+                <Link
+                  to="/login"
+                  onClick={() => setMobileOpen(false)}
+                  className="text-base font-body text-verde-700 px-4 py-3 rounded-xl hover:bg-cream-50"
+                >
+                  Log In
+                </Link>
+              )}
               <Link
                 to="/properties"
                 onClick={() => setMobileOpen(false)}

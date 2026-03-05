@@ -9,6 +9,9 @@ import ContactPage from '@/pages/ContactPage';
 import BookingConfirmationPage from '@/pages/BookingConfirmationPage';
 import CheckoutPage from '@/pages/CheckoutPage';
 import BlogPage from '@/pages/BlogPage';
+import BlogPostPage from '@/pages/BlogPostPage';
+import LoginPage from '@/pages/LoginPage';
+import SignupPage from '@/pages/SignupPage';
 import NotFoundPage from '@/pages/NotFoundPage';
 
 export const router = createBrowserRouter([
@@ -23,6 +26,9 @@ export const router = createBrowserRouter([
       { path: 'faq', element: <FAQPage /> },
       { path: 'contact', element: <ContactPage /> },
       { path: 'blog', element: <BlogPage /> },
+      { path: 'blog/:slug', element: <BlogPostPage /> },
+      { path: 'login', element: <LoginPage /> },
+      { path: 'signup', element: <SignupPage /> },
       { path: 'booking/checkout', element: <CheckoutPage /> },
       { path: 'booking/confirmation', element: <BookingConfirmationPage /> },
       { path: '*', element: <NotFoundPage /> },

@@ -1,10 +1,13 @@
 import { useState, useRef, useEffect } from 'react';
-import { Link } from 'react-router-dom';
-import { Menu, User, LogIn, UserPlus, HelpCircle, Info } from 'lucide-react';
+import { Link, useNavigate } from 'react-router-dom';
+import { Menu, User, LogIn, UserPlus, LogOut, HelpCircle, Info, CalendarCheck } from 'lucide-react';
+import { useAuth } from '@/context/AuthContext';
 
 export default function UserMenu({ variant = 'light' }) {
   const [open, setOpen] = useState(false);
   const menuRef = useRef(null);
+  const navigate = useNavigate();
+  const { user, signOut } = useAuth();
 
   useEffect(() => {
     const handleClickOutside = (e) => {
@@ -17,6 +20,12 @@ export default function UserMenu({ variant = 'light' }) {
   }, []);
 
   const isLight = variant === 'light';
+
+  const handleSignOut = async () => {
+    setOpen(false);
+    await signOut();
+    navigate('/');
+  };
 
   return (
     <div ref={menuRef} className="relative">
@@ -38,22 +47,48 @@ export default function UserMenu({ variant = 'light' }) {
 
       {open && (
         <div className="absolute right-0 top-14 w-56 bg-surface rounded-2xl shadow-elevated border border-verde-100 overflow-hidden z-50 animate-in fade-in slide-in-from-top-2">
-          <div className="py-2">
-            <Link
-              to="/contact"
-              onClick={() => setOpen(false)}
-              className="flex items-center gap-3 px-4 py-3 text-sm font-body font-semibold text-verde-800 hover:bg-cream-50 transition-colors"
-            >
-              <LogIn size={16} /> Log In
-            </Link>
-            <Link
-              to="/contact"
-              onClick={() => setOpen(false)}
-              className="flex items-center gap-3 px-4 py-3 text-sm font-body text-verde-700 hover:bg-cream-50 transition-colors"
-            >
-              <UserPlus size={16} /> Sign Up
-            </Link>
-          </div>
+          {user ? (
+            <>
+              <div className="px-4 py-3 border-b border-verde-100">
+                <p className="font-body font-semibold text-verde-800 text-sm truncate">
+                  {user.user_metadata?.full_name || 'Guest'}
+                </p>
+                <p className="font-body text-xs text-text-muted truncate">{user.email}</p>
+              </div>
+              <div className="py-2">
+                <Link
+                  to="/properties"
+                  onClick={() => setOpen(false)}
+                  className="flex items-center gap-3 px-4 py-3 text-sm font-body text-verde-700 hover:bg-cream-50 transition-colors"
+                >
+                  <CalendarCheck size={16} /> My Bookings
+                </Link>
+                <button
+                  onClick={handleSignOut}
+                  className="w-full flex items-center gap-3 px-4 py-3 text-sm font-body text-red-600 hover:bg-red-50 transition-colors"
+                >
+                  <LogOut size={16} /> Sign Out
+                </button>
+              </div>
+            </>
+          ) : (
+            <div className="py-2">
+              <Link
+                to="/login"
+                onClick={() => setOpen(false)}
+                className="flex items-center gap-3 px-4 py-3 text-sm font-body font-semibold text-verde-800 hover:bg-cream-50 transition-colors"
+              >
+                <LogIn size={16} /> Log In
+              </Link>
+              <Link
+                to="/signup"
+                onClick={() => setOpen(false)}
+                className="flex items-center gap-3 px-4 py-3 text-sm font-body text-verde-700 hover:bg-cream-50 transition-colors"
+              >
+                <UserPlus size={16} /> Sign Up
+              </Link>
+            </div>
+          )}
           <div className="border-t border-verde-100 py-2">
             <Link
               to="/faq"
