@@ -5,7 +5,7 @@ export const blogPosts = [
     category: 'Neighborhood',
     date: '2026-02-15',
     readTime: '8 min read',
-    image: 'https://images.unsplash.com/photo-1535498730771-e735b998cd64?w=1200&q=80',
+    image: '/images/little-havana-main.jpg',
     excerpt: 'Discover the hidden gems, best restaurants, and cultural experiences that make Little Havana one of Miami\'s most beloved neighborhoods.',
     content: [
       {
@@ -358,53 +358,6 @@ export const blogPosts = [
     ],
   },
   {
-    slug: 'little-havana-welcome-guide',
-    title: 'Little Havana Welcome Guide',
-    category: 'Neighborhood',
-    date: '2026-03-05',
-    readTime: '4 min read',
-    image: '/images/little-havana-main.jpg',
-    excerpt: 'Little Havana is one of Miami\'s most historic, energetic neighborhoods — best enjoyed slowly: coffee in hand, music in the air, and a few great stops along Calle Ocho.',
-    content: [
-      {
-        type: 'paragraph',
-        text: 'Little Havana is one of Miami\'s most historic, energetic neighborhoods — best enjoyed slowly: coffee in hand, music in the air, and a few great stops along Calle Ocho.',
-      },
-      {
-        type: 'heading',
-        text: 'Lung Yai Thai Tapas (MICHELIN Bib Gourmand)',
-      },
-      {
-        type: 'paragraph',
-        text: 'Distance from the property: ~5-minute walk. A tiny, easy-to-miss spot on Calle Ocho that\'s become a destination for bold, authentic Thai flavors. It\'s recognized in the MICHELIN Guide (Bib Gourmand) for quality and value.',
-      },
-      {
-        type: 'heading',
-        text: 'Sanguich de Miami (MICHELIN Bib Gourmand)',
-      },
-      {
-        type: 'paragraph',
-        text: 'Distance from the property: ~5\u201310-minute drive. A Little Havana favorite specializing in pressed Cuban sandwiches with a serious following — and a MICHELIN Bib Gourmand nod. Great for a quick, iconic Miami bite.',
-      },
-      {
-        type: 'heading',
-        text: 'Versailles Restaurant (Little Havana Landmark)',
-      },
-      {
-        type: 'paragraph',
-        text: 'Distance from the property: ~5\u201310-minute drive. A Miami institution serving Cuban classics since 1971 — part restaurant, part cultural landmark, and a go-to for a true Little Havana experience.',
-      },
-      {
-        type: 'heading',
-        text: 'Caf\u00e9 La Trova (Live Music + Cantinero Cocktails)',
-      },
-      {
-        type: 'paragraph',
-        text: 'Distance from the property: ~5\u201310-minute drive. A Little Havana bar/restaurant known for Cuban cantinero-style cocktails and live music — an excellent night-out option when you want atmosphere with your drink.',
-      },
-    ],
-  },
-  {
     slug: 'neighborhoods-worth-exploring',
     title: 'Neighborhoods Worth Exploring',
     category: 'Explore Miami',
@@ -481,7 +434,7 @@ export const blogPosts = [
     category: 'Beaches',
     date: '2026-03-05',
     readTime: '4 min read',
-    image: 'https://images.unsplash.com/photo-1507525428034-b723cf961d3e?w=1200&q=80',
+    image: '/images/beach-guide.jpg',
     excerpt: 'Miami beaches can feel totally different depending on where you go — here are the calmer, prettier spots we usually point guests toward.',
     content: [
       {
@@ -528,7 +481,7 @@ export const blogPosts = [
     category: 'Culture',
     date: '2026-03-05',
     readTime: '5 min read',
-    image: 'https://images.unsplash.com/photo-1506477331477-33d5d8b3dc85?w=1200&q=80',
+    image: '/images/culture-hidden-gems.jpg',
     excerpt: 'Museums, gardens, and slow-paced spots — these are the places we recommend when guests want a calmer day that still feels very "Miami."',
     content: [
       {

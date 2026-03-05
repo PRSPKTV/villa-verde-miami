@@ -26,8 +26,8 @@ export default function BlogPage() {
         to={`/blog/${featured.slug}`}
         className="block max-w-6xl mx-auto mb-12 group"
       >
-        <div className="bg-surface rounded-3xl border border-verde-100 overflow-hidden shadow-card md:flex">
-          <div className="relative md:w-1/2 h-64 md:h-auto overflow-hidden">
+        <div className="bg-surface rounded-3xl border border-verde-100 overflow-hidden shadow-card md:flex md:max-h-[320px]">
+          <div className="relative md:w-1/2 h-56 md:h-auto overflow-hidden">
             <img
               src={featured.image}
               alt={featured.title}
