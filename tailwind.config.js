@@ -4,6 +4,9 @@ export default {
   theme: {
     extend: {
       colors: {
+        surface: '#FFFFFF',
+        'text-secondary': '#6d9480',
+        'text-muted': '#9db8ab',
         verde: {
           50: '#e7edea',
           100: '#cedbd5',
@@ -17,14 +20,19 @@ export default {
           900: '#081d12',
         },
         cream: {
+          50: '#FDFBF7',
           100: '#FAF6F0',
           200: '#F2ECDF',
           300: '#E8E1D0',
         },
         gold: {
+          50: '#FDF8EC',
+          100: '#FAF0D4',
+          200: '#F5E5B3',
           400: '#d4b970',
           500: '#C9A84C',
           600: '#B8943D',
+          700: '#9A7A2E',
         },
         terracotta: {
           500: '#C75B39',
