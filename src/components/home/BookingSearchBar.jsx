@@ -46,17 +46,21 @@ export default function BookingSearchBar() {
   const handleDateClick = (date) => {
     if (isBefore(date, new Date()) && !isToday(date)) return;
 
-    if (activeField === 'checkin' || (!checkIn && activeField === 'checkout')) {
+    const isCheckinField = activeField === 'checkin' || activeField === 'm-checkin';
+    const isCheckoutField = activeField === 'checkout' || activeField === 'm-checkout';
+    const isMobile = activeField === 'm-checkin' || activeField === 'm-checkout';
+
+    if (isCheckinField || (!checkIn && isCheckoutField)) {
       setCheckIn(date);
       setCheckOut(null);
-      setActiveField('checkout');
-    } else if (activeField === 'checkout') {
+      setActiveField(isMobile ? 'm-checkout' : 'checkout');
+    } else if (isCheckoutField) {
       if (isBefore(date, checkIn)) {
         setCheckIn(date);
         setCheckOut(null);
       } else {
         setCheckOut(date);
-        setActiveField(null);
+        setActiveField(isMobile ? 'mobile' : null);
       }
     }
   };
@@ -242,7 +246,7 @@ export default function BookingSearchBar() {
       )}
 
       {(activeField === 'checkin' || activeField === 'checkout') && (
-        <div className="absolute top-full left-1/2 -translate-x-1/2 mt-3 w-80 bg-surface rounded-2xl shadow-elevated border border-verde-100 z-50">
+        <div className="hidden md:block absolute top-full left-1/2 -translate-x-1/2 mt-3 w-80 bg-surface rounded-2xl shadow-elevated border border-verde-100 z-50">
           {renderCalendar()}
         </div>
       )}
@@ -282,13 +286,105 @@ export default function BookingSearchBar() {
           className="w-full bg-surface/95 backdrop-blur-xl rounded-2xl shadow-elevated border border-verde-100/50 p-4 flex items-center gap-3"
         >
           <Search size={18} className="text-verde-500 shrink-0" />
-          <div className="text-left">
+          <div className="text-left flex-1">
             <div className="font-body text-sm font-semibold text-verde-800">Search properties</div>
             <div className="font-body text-xs text-text-muted">
-              {checkIn ? format(checkIn, 'MMM d') : 'Any dates'} · {guests} guests
+              {checkIn && checkOut
+                ? `${format(checkIn, 'MMM d')} – ${format(checkOut, 'MMM d')}`
+                : checkIn
+                  ? `${format(checkIn, 'MMM d')} – Add checkout`
+                  : 'Add dates'
+              } · {guests} {guests === 1 ? 'guest' : 'guests'}
             </div>
           </div>
+          <ChevronDown size={16} className={`text-text-muted transition-transform ${activeField === 'mobile' ? 'rotate-180' : ''}`} />
         </button>
+
+        {/* Mobile expanded panel */}
+        {activeField === 'mobile' && (
+          <div className="mt-2 bg-surface/95 backdrop-blur-xl rounded-2xl shadow-elevated border border-verde-100/50 overflow-hidden">
+            {/* Check In */}
+            <button
+              onClick={() => setActiveField('m-checkin')}
+              className="w-full flex items-center gap-3 px-5 py-4 border-b border-verde-100/50 hover:bg-cream-50 transition-colors"
+            >
+              <CalendarDays size={18} className="text-verde-400 shrink-0" />
+              <div className="text-left">
+                <div className="font-data text-[11px] uppercase tracking-wider text-text-muted">Check in</div>
+                <div className="font-body text-sm font-medium text-verde-800">
+                  {checkIn ? format(checkIn, 'MMM d, yyyy') : 'Add date'}
+                </div>
+              </div>
+            </button>
+
+            {/* Check Out */}
+            <button
+              onClick={() => setActiveField('m-checkout')}
+              className="w-full flex items-center gap-3 px-5 py-4 border-b border-verde-100/50 hover:bg-cream-50 transition-colors"
+            >
+              <CalendarDays size={18} className="text-verde-400 shrink-0" />
+              <div className="text-left">
+                <div className="font-data text-[11px] uppercase tracking-wider text-text-muted">Check out</div>
+                <div className="font-body text-sm font-medium text-verde-800">
+                  {checkOut ? format(checkOut, 'MMM d, yyyy') : 'Add date'}
+                </div>
+              </div>
+            </button>
+
+            {/* Guests */}
+            <div className="flex items-center justify-between px-5 py-4 border-b border-verde-100/50">
+              <div className="flex items-center gap-3">
+                <Users size={18} className="text-verde-400 shrink-0" />
+                <div>
+                  <div className="font-data text-[11px] uppercase tracking-wider text-text-muted">Guests</div>
+                  <div className="font-body text-sm font-medium text-verde-800">{guests} {guests === 1 ? 'guest' : 'guests'}</div>
+                </div>
+              </div>
+              <div className="flex items-center gap-3">
+                <button
+                  onClick={() => setGuests(Math.max(1, guests - 1))}
+                  className="w-8 h-8 rounded-full border border-verde-200 flex items-center justify-center text-verde-600 disabled:opacity-30"
+                  disabled={guests <= 1}
+                >
+                  <Minus size={14} />
+                </button>
+                <span className="font-data text-base font-semibold text-verde-800 w-4 text-center">{guests}</span>
+                <button
+                  onClick={() => setGuests(Math.min(8, guests + 1))}
+                  className="w-8 h-8 rounded-full border border-verde-200 flex items-center justify-center text-verde-600 disabled:opacity-30"
+                  disabled={guests >= 8}
+                >
+                  <Plus size={14} />
+                </button>
+              </div>
+            </div>
+
+            {/* Search button */}
+            <div className="p-4">
+              <button
+                onClick={handleSearch}
+                className="w-full bg-gold-500 hover:bg-gold-400 text-verde-800 rounded-xl py-3 font-body font-semibold flex items-center justify-center gap-2 transition-colors"
+              >
+                <Search size={18} /> Search
+              </button>
+            </div>
+          </div>
+        )}
+
+        {/* Mobile calendar dropdown */}
+        {(activeField === 'm-checkin' || activeField === 'm-checkout') && (
+          <div className="mt-2 bg-surface rounded-2xl shadow-elevated border border-verde-100 z-50">
+            <div className="px-4 pt-3 pb-1 flex items-center justify-between">
+              <span className="font-data text-xs uppercase tracking-wider text-verde-500 font-semibold">
+                {activeField === 'm-checkin' ? 'Select check-in date' : 'Select check-out date'}
+              </span>
+              <button onClick={() => setActiveField('mobile')} className="text-text-muted text-xs font-body underline">
+                Done
+              </button>
+            </div>
+            {renderCalendar()}
+          </div>
+        )}
       </div>
     </div>
   );

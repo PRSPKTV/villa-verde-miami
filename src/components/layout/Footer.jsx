@@ -77,9 +77,10 @@ export default function Footer() {
 
         <div className="flex flex-col gap-3 font-body text-sm font-medium">
           <div className="font-data text-xs uppercase tracking-widest text-gold-500 mb-1">Legal</div>
-          <a href="#" className="text-cream-200/70 hover:text-gold-500 transition-colors">Privacy Policy</a>
-          <a href="#" className="text-cream-200/70 hover:text-gold-500 transition-colors">Terms of Service</a>
-          <a href="#" className="text-cream-200/70 hover:text-gold-500 transition-colors">Cancellation Policy</a>
+          <Link to="/legal/privacy-policy" className="text-cream-200/70 hover:text-gold-500 transition-colors">Privacy Policy</Link>
+          <Link to="/legal/terms-of-service" className="text-cream-200/70 hover:text-gold-500 transition-colors">Terms of Service</Link>
+          <Link to="/legal/cancellation-policy" className="text-cream-200/70 hover:text-gold-500 transition-colors">Cancellation Policy</Link>
+          <Link to="/legal/house-rules" className="text-cream-200/70 hover:text-gold-500 transition-colors">House Rules</Link>
           <div className="flex gap-4 mt-4">
             <a href="https://www.instagram.com/villaverdemiami/" target="_blank" rel="noopener noreferrer" className="text-cream-200/50 hover:text-gold-500 transition-colors" aria-label="Instagram">
               <Instagram size={20} />
