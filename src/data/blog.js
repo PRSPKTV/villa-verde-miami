@@ -547,41 +547,93 @@ export const blogPosts = [
     ],
   },
   {
-    slug: 'restaurants-we-recommend',
-    title: 'Restaurants We Recommend',
+    slug: 'restaurant-guide-miami',
+    title: 'Restaurant Guide: Nearby and Around Miami',
     category: 'Food & Drink',
     date: '2026-03-05',
-    readTime: '5 min read',
+    readTime: '10 min read',
     image: 'https://images.unsplash.com/photo-1414235077428-338989a2e8c0?w=1200&q=80',
-    excerpt: 'A mix of Little Havana staples and a few "worth it" spots around the city — mostly local favorites.',
+    excerpt: 'Local favorites, not tourist traps — our curated guide to the best restaurants near the property and around Miami, organized by cuisine.',
     content: [
       {
         type: 'paragraph',
-        text: 'A mix of Little Havana staples + a few "worth it" spots around the city.',
+        text: 'Most of the restaurants below are local staples or neighborhood favorites rather than the typical tourist restaurants in Miami. A few are a little more upscale or "bougie," but they\'re absolutely worth visiting.',
       },
       {
         type: 'heading',
-        text: 'Walkable / Very Close',
+        text: 'Cuban Food',
       },
       {
         type: 'paragraph',
-        text: 'Lung Yai Thai Tapas (MICHELIN Bib Gourmand) \u2014 ~5-minute walk. Small, intimate, and MICHELIN-recognized — one of the best "close to home" meals you can do.',
+        text: 'Versailles Restaurant \u2014 ~7-minute drive. One of the most famous Cuban restaurants in Miami and a cultural landmark in Little Havana since 1971. Known for classic Cuban dishes like ropa vieja, vaca frita, and Cuban sandwiches. Also famous for its walk-up coffee window where locals gather for cafecito.',
       },
       {
         type: 'paragraph',
-        text: 'Sanguich de Miami (MICHELIN Bib Gourmand) \u2014 ~5\u201310-minute drive. Pressed Cuban sandwiches with serious attention to detail and a MICHELIN Bib Gourmand mention — easy win.',
+        text: 'Caf\u00e9 La Trova \u2014 ~6-minute drive. Blends traditional Cuban food with a lively music and cocktail scene. The bar program is led by award-winning cantineros who specialize in classic Cuban cocktails. In the evenings it often feels more like a small Havana nightclub than a restaurant.',
+      },
+      {
+        type: 'paragraph',
+        text: 'Social 27 \u2014 ~6-minute drive. A stylish Cuban-American restaurant and cocktail bar that mixes traditional flavors with modern presentation. A good option if you want Cuban food in a slightly more contemporary setting.',
       },
       {
         type: 'heading',
-        text: 'Little Havana Classics',
+        text: 'Cuban Sandwiches',
       },
       {
         type: 'paragraph',
-        text: 'Versailles \u2014 ~5\u201310-minute drive. A Little Havana landmark for Cuban food and the "classic Miami Cuban restaurant" experience.',
+        text: 'Sanguich de Miami \u2014 ~6-minute drive. A Little Havana favorite specializing in authentic Cuban sandwiches made with house-roasted meats and freshly pressed bread. The restaurant has gained national attention and recognition in the MICHELIN Guide for its quality and attention to detail.',
+      },
+      {
+        type: 'heading',
+        text: 'Thai',
       },
       {
         type: 'paragraph',
-        text: 'Caf\u00e9 La Trova \u2014 ~5\u201310-minute drive. Dinner + cocktails + live music in one place, led by a highly regarded bar team and Cuban culture focus.',
+        text: 'Lung Yai Thai Tapas (MICHELIN Guide \u2013 Bib Gourmand) \u2014 ~5-minute walk. One of the best restaurants within walking distance of the house. A small, humble spot that has gained international recognition for its bold and authentic Thai flavors. Included in the MICHELIN Guide\'s Bib Gourmand list, highlighting excellent food at a great value.',
+      },
+      {
+        type: 'paragraph',
+        text: 'Asian Thai Kitchen 2 \u2014 ~5-minute drive. A casual neighborhood Thai restaurant on Calle Ocho known for generous portions and classic dishes like pad thai, drunken noodles, and curry. A reliable option for simple, authentic Thai comfort food.',
+      },
+      {
+        type: 'heading',
+        text: 'Indian',
+      },
+      {
+        type: 'paragraph',
+        text: 'Bombay Darbar \u2014 ~12-minute drive (Coconut Grove). One of Miami\'s best-known Indian restaurants. Offers an extensive menu of traditional Indian dishes including butter chicken, lamb vindaloo, and fresh naan baked in a tandoor oven.',
+      },
+      {
+        type: 'paragraph',
+        text: 'Zaika Indian Cuisine \u2014 ~25-minute drive (North Miami). A well-regarded Indian restaurant known for its rich curries, tandoori dishes, and flavorful vegetarian options. A great choice if you\'re exploring North Miami or heading toward Aventura.',
+      },
+      {
+        type: 'heading',
+        text: 'Chinese',
+      },
+      {
+        type: 'paragraph',
+        text: 'King\'s Palace Chinese BBQ \u2014 ~30-minute drive (North Miami Beach). Known for Cantonese-style roasted meats like BBQ pork, roast duck, and crispy pork belly. One of the best spots in Miami for authentic Chinese barbecue.',
+      },
+      {
+        type: 'heading',
+        text: 'Nicaraguan',
+      },
+      {
+        type: 'paragraph',
+        text: 'Ca\u00f1a Brava \u2014 ~10-minute drive. A popular Nicaraguan restaurant known for traditional dishes like carne asada, gallo pinto, and nacatamales. The portions are generous and the atmosphere is casual and lively.',
+      },
+      {
+        type: 'heading',
+        text: 'Italian',
+      },
+      {
+        type: 'paragraph',
+        text: 'Red Carpet Italian Restaurant \u2014 ~5-minute drive. A longtime neighborhood Italian restaurant serving classic dishes like chicken parmigiana, pasta bolognese, and seafood pasta. A relaxed spot that feels like an old-school family Italian restaurant.',
+      },
+      {
+        type: 'paragraph',
+        text: 'Fratelli Milano \u2014 ~10-minute drive (Downtown Miami). An authentic Italian restaurant run by chefs from Milan. Known for handmade pastas and traditional northern Italian dishes \u2014 one of the better Italian dining experiences in downtown Miami.',
       },
       {
         type: 'heading',
@@ -589,15 +641,67 @@ export const blogPosts = [
       },
       {
         type: 'paragraph',
-        text: 'Mister O1 (Brickell / other locations) \u2014 ~10\u201320-minute drive. Known for "extraordinary pizza" built on precision and high-quality ingredients — great when you want something fun and reliably good.',
+        text: 'Mister O1 Extraordinary Pizza \u2014 ~12-minute drive (Brickell). One of the most popular pizza restaurants in Miami. Known for its thin crust pizzas and creative combinations, including its signature star-shaped pizza filled with ricotta cheese.',
       },
       {
         type: 'heading',
-        text: '"Bougie But Worth It"',
+        text: 'Steak',
       },
       {
         type: 'paragraph',
-        text: 'Casa Tua Cucina (Brickell City Centre) \u2014 ~10\u201315-minute drive. A lively, multi-concept Italian dining experience inside Brickell City Centre — great ambiance, lots of options, and excellent for groups.',
+        text: 'The Wagyu Bar \u2014 ~10-minute drive. A modern steakhouse specializing in premium wagyu beef and upscale steakhouse dishes. Focuses on high-quality ingredients and a stylish dining atmosphere.',
+      },
+      {
+        type: 'paragraph',
+        text: 'El Toro Loco \u2014 ~5-minute drive. A casual Latin steakhouse known for grilled meats and generous portions. A straightforward place to get a good steak or churrasco without the formal steakhouse atmosphere.',
+      },
+      {
+        type: 'heading',
+        text: 'Sushi',
+      },
+      {
+        type: 'paragraph',
+        text: 'Ahi Sushi Bar \u2014 ~5-minute drive. A popular local sushi restaurant on Calle Ocho known for fresh fish and a wide selection of sushi rolls and Japanese dishes.',
+      },
+      {
+        type: 'paragraph',
+        text: 'Sushi Sake \u2013 Little Havana \u2014 ~5-minute drive. A casual sushi spot known for late hours, affordable rolls, and a lively neighborhood vibe.',
+      },
+      {
+        type: 'heading',
+        text: 'Dominican',
+      },
+      {
+        type: 'paragraph',
+        text: 'Milly\'s Restaurant \u2014 ~8-minute drive. A well-known Dominican restaurant serving classic dishes like mofongo, stewed chicken, and fried pork. A great place to try authentic Dominican comfort food.',
+      },
+      {
+        type: 'heading',
+        text: 'Mexican',
+      },
+      {
+        type: 'paragraph',
+        text: 'Mi Rinconcito Mexicano \u2014 ~5-minute drive. A family-run Mexican restaurant known for traditional dishes like tacos, enchiladas, and handmade tortillas.',
+      },
+      {
+        type: 'paragraph',
+        text: 'El Santo Taqueria \u2014 ~5-minute drive. A casual taqueria serving street-style tacos, burritos, and Mexican comfort food.',
+      },
+      {
+        type: 'heading',
+        text: 'Desserts',
+      },
+      {
+        type: 'paragraph',
+        text: 'Oh My Gosh Brigadeiros \u2014 ~6-minute drive. A Brazilian dessert shop specializing in brigadeiros \u2014 rich chocolate truffles made with condensed milk and cocoa. A great stop if you\'re craving something sweet.',
+      },
+      {
+        type: 'heading',
+        text: 'Quick Tip for Guests',
+      },
+      {
+        type: 'paragraph',
+        text: 'Little Havana and Brickell have a huge number of restaurants, so if you\'re unsure where to go, feel free to ask. We\'re always happy to recommend something based on the type of food or atmosphere you\'re looking for.',
       },
     ],
   },
@@ -650,7 +754,7 @@ export const blogPosts = [
     category: 'Guest Guide',
     date: '2026-03-05',
     readTime: '2 min read',
-    image: 'https://images.unsplash.com/photo-1542838132-92c53300491e?w=1200&q=80',
+    image: '/images/grocery-store.jpg',
     excerpt: 'Quick essentials and grocery stores within a short drive of the property — everything you need to stock up.',
     content: [
       {
