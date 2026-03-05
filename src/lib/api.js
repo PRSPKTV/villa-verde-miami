@@ -49,6 +49,21 @@ export async function subscribeNewsletter(email) {
   return supabaseFunction('subscribe-newsletter', { email });
 }
 
+export async function getMyBookings(email) {
+  const res = await fetch(
+    `${SUPABASE_URL}/functions/v1/get-bookings?email=${encodeURIComponent(email)}`,
+    {
+      headers: {
+        'Authorization': `Bearer ${SUPABASE_ANON_KEY}`,
+        'apikey': SUPABASE_ANON_KEY,
+      },
+    }
+  );
+  const data = await res.json();
+  if (!res.ok) throw new Error(data.error || 'Failed to fetch bookings');
+  return data.bookings;
+}
+
 export async function syncCalendar(slug) {
   const url = slug
     ? `${SUPABASE_URL}/functions/v1/sync-calendar?slug=${encodeURIComponent(slug)}`

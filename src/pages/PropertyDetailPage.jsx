@@ -5,6 +5,7 @@ import { availability as staticAvailability } from '@/data/availability';
 import { amenityMap } from '@/data/amenities';
 import { getAvailability } from '@/lib/api';
 import { useBooking } from '@/context/BookingContext';
+import { useAuth } from '@/context/AuthContext';
 import { getNumberOfNights, formatDateRange, isDateBlocked, isPastDate, isSameDay, startOfDay } from '@/utils/dateUtils';
 import { calculatePricing, formatCurrency } from '@/utils/priceUtils';
 import { formatRating, pluralize } from '@/utils/formatters';
@@ -24,6 +25,7 @@ export default function PropertyDetailPage() {
   const { slug } = useParams();
   const navigate = useNavigate();
   const { updateSearchParams, setSelectedProperty, updateGuestDetails, computePricing, searchParams } = useBooking();
+  const { user } = useAuth();
 
   const property = useMemo(() => properties.find(p => p.slug === slug), [slug]);
 
@@ -36,6 +38,19 @@ export default function PropertyDetailPage() {
   const [showAllReviews, setShowAllReviews] = useState(false);
   const [formSubmitted, setFormSubmitted] = useState(false);
   const [form, setForm] = useState({ firstName: '', lastName: '', email: '', phone: '', specialRequests: '' });
+
+  // Auto-fill form for logged-in users
+  useEffect(() => {
+    if (!user) return;
+    const fullName = user.user_metadata?.full_name || '';
+    const parts = fullName.trim().split(/\s+/);
+    setForm(prev => ({
+      ...prev,
+      firstName: prev.firstName || parts[0] || '',
+      lastName: prev.lastName || parts.slice(1).join(' ') || '',
+      email: prev.email || user.email || '',
+    }));
+  }, [user]);
 
   const [blockedDates, setBlockedDates] = useState([]);
 

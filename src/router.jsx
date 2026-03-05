@@ -14,6 +14,7 @@ import LoginPage from '@/pages/LoginPage';
 import SignupPage from '@/pages/SignupPage';
 import NotFoundPage from '@/pages/NotFoundPage';
 import LegalPage from '@/pages/LegalPage';
+import MyBookingsPage from '@/pages/MyBookingsPage';
 
 export const router = createBrowserRouter([
   {
@@ -31,6 +32,7 @@ export const router = createBrowserRouter([
       { path: 'legal/:type', element: <LegalPage /> },
       { path: 'login', element: <LoginPage /> },
       { path: 'signup', element: <SignupPage /> },
+      { path: 'my-bookings', element: <MyBookingsPage /> },
       { path: 'booking/checkout', element: <CheckoutPage /> },
       { path: 'booking/confirmation', element: <BookingConfirmationPage /> },
       { path: '*', element: <NotFoundPage /> },

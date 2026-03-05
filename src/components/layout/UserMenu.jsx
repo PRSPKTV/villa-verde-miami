@@ -57,7 +57,7 @@ export default function UserMenu({ variant = 'light' }) {
               </div>
               <div className="py-2">
                 <Link
-                  to="/properties"
+                  to="/my-bookings"
                   onClick={() => setOpen(false)}
                   className="flex items-center gap-3 px-4 py-3 text-sm font-body text-verde-700 hover:bg-cream-50 transition-colors"
                 >
