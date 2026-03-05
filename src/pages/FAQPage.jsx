@@ -1,13 +1,22 @@
-import { faqData } from '@/data/faq';
+import { useFAQ } from '@/hooks/useFAQ';
 import Accordion from '@/components/ui/Accordion';
 import { useGsapAnimation } from '@/hooks/useGsapAnimation';
 
 export default function FAQPage() {
+  const { faqData, loading } = useFAQ();
   const heroRef = useGsapAnimation((el, gsap) => {
     gsap.from(el.querySelectorAll('.faq-hero-anim'), {
       y: 30, opacity: 0, duration: 1, stagger: 0.15, ease: 'power3.out', delay: 0.2,
     });
   });
+
+  if (loading) {
+    return (
+      <div className="pt-32 pb-20 flex items-center justify-center min-h-[60vh]">
+        <div className="animate-spin rounded-full h-8 w-8 border-2 border-verde-500 border-t-transparent" />
+      </div>
+    );
+  }
 
   return (
     <div className="pt-28 pb-20">

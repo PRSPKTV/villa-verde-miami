@@ -1,6 +1,6 @@
 import { useParams, useNavigate } from 'react-router-dom';
 import { useMemo, useState, useCallback, useEffect } from 'react';
-import { properties } from '@/data/properties';
+import { useProperties } from '@/hooks/useProperties';
 import { availability as staticAvailability } from '@/data/availability';
 import { amenityMap } from '@/data/amenities';
 import { getAvailability } from '@/lib/api';
@@ -26,8 +26,9 @@ export default function PropertyDetailPage() {
   const navigate = useNavigate();
   const { updateSearchParams, setSelectedProperty, updateGuestDetails, computePricing, searchParams } = useBooking();
   const { user } = useAuth();
+  const { properties, loading: propertiesLoading } = useProperties();
 
-  const property = useMemo(() => properties.find(p => p.slug === slug), [slug]);
+  const property = useMemo(() => properties.find(p => p.slug === slug), [properties, slug]);
 
   const [galleryOpen, setGalleryOpen] = useState(false);
   const [galleryIndex, setGalleryIndex] = useState(0);
@@ -98,6 +99,14 @@ export default function PropertyDetailPage() {
     computePricing(property.pricing, checkIn, checkOut);
     navigate('/booking/checkout');
   };
+
+  if (propertiesLoading) {
+    return (
+      <div className="pt-32 pb-20 flex items-center justify-center min-h-[60vh]">
+        <div className="animate-spin rounded-full h-8 w-8 border-2 border-verde-500 border-t-transparent" />
+      </div>
+    );
+  }
 
   if (!property) {
     return (

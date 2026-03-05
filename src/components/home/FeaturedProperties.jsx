@@ -1,10 +1,12 @@
-import { properties } from '@/data/properties';
+import { useProperties } from '@/hooks/useProperties';
 import PropertyCard from '@/components/properties/PropertyCard';
 import Button from '@/components/ui/Button';
 import { useGsapAnimation } from '@/hooks/useGsapAnimation';
 import { ArrowRight } from 'lucide-react';
 
 export default function FeaturedProperties() {
+  const { properties, loading } = useProperties();
+
   const sectionRef = useGsapAnimation((el, gsap, ScrollTrigger) => {
     gsap.from(el.querySelectorAll('.featured-anim'), {
       y: 80,
@@ -15,6 +17,8 @@ export default function FeaturedProperties() {
       scrollTrigger: { trigger: el, start: 'top 75%' },
     });
   });
+
+  if (loading || properties.length === 0) return null;
 
   return (
     <section ref={sectionRef} className="pt-32 md:pt-40 pb-24 md:pb-32 px-4 md:px-8 max-w-7xl mx-auto">

@@ -2,11 +2,12 @@ import { useState, useRef, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Search, ChevronDown, CalendarDays, Users, Minus, Plus } from 'lucide-react';
 import { format, addDays, startOfMonth, endOfMonth, eachDayOfInterval, getDay, isBefore, isSameDay, isToday } from 'date-fns';
-import { properties } from '@/data/properties';
+import { useProperties } from '@/hooks/useProperties';
 import { useBooking } from '@/context/BookingContext';
 
 export default function BookingSearchBar() {
   const navigate = useNavigate();
+  const { properties } = useProperties();
   const { updateSearchParams } = useBooking();
   const [activeField, setActiveField] = useState(null);
   const [selectedProperty, setSelectedProperty] = useState('all');

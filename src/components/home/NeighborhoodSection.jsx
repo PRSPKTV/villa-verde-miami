@@ -1,8 +1,10 @@
-import { neighborhoodHighlights } from '@/data/neighborhood';
+import { useNeighborhood } from '@/hooks/useNeighborhood';
 import { useGsapAnimation } from '@/hooks/useGsapAnimation';
 import * as LucideIcons from 'lucide-react';
 
 export default function NeighborhoodSection() {
+  const { neighborhood: neighborhoodHighlights, loading } = useNeighborhood();
+
   const sectionRef = useGsapAnimation((el, gsap, ScrollTrigger) => {
     gsap.from(el.querySelectorAll('.hood-anim'), {
       y: 60,
@@ -13,6 +15,8 @@ export default function NeighborhoodSection() {
       scrollTrigger: { trigger: el, start: 'top 75%' },
     });
   });
+
+  if (loading || neighborhoodHighlights.length === 0) return null;
 
   return (
     <section ref={sectionRef} className="py-24 md:py-32 px-4 md:px-8 max-w-7xl mx-auto">

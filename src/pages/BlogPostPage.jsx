@@ -1,12 +1,13 @@
 import { useParams, Link, useNavigate } from 'react-router-dom';
 import { useGsapAnimation } from '@/hooks/useGsapAnimation';
 import { ArrowLeft, Calendar, Clock, Tag } from 'lucide-react';
-import { blogPosts } from '@/data/blog';
+import { useBlogPosts } from '@/hooks/useBlogPosts';
 import { format, parseISO } from 'date-fns';
 
 export default function BlogPostPage() {
   const { slug } = useParams();
   const navigate = useNavigate();
+  const { blogPosts, loading } = useBlogPosts();
   const post = blogPosts.find(p => p.slug === slug);
 
   const heroRef = useGsapAnimation((el, gsap) => {
@@ -14,6 +15,14 @@ export default function BlogPostPage() {
       y: 30, opacity: 0, duration: 1, stagger: 0.12, ease: 'power3.out', delay: 0.2,
     });
   });
+
+  if (loading) {
+    return (
+      <div className="pt-32 pb-20 flex items-center justify-center min-h-[60vh]">
+        <div className="animate-spin rounded-full h-8 w-8 border-2 border-verde-500 border-t-transparent" />
+      </div>
+    );
+  }
 
   if (!post) {
     return (

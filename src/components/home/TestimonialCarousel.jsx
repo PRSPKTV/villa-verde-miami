@@ -1,18 +1,20 @@
 import { useState, useEffect } from 'react';
-import { testimonials } from '@/data/testimonials';
+import { useTestimonials } from '@/hooks/useTestimonials';
 import StarRating from '@/components/ui/StarRating';
 import { useGsapAnimation } from '@/hooks/useGsapAnimation';
 import { ChevronLeft, ChevronRight, Quote } from 'lucide-react';
 
 export default function TestimonialCarousel() {
+  const { testimonials, loading } = useTestimonials();
   const [current, setCurrent] = useState(0);
 
   useEffect(() => {
+    if (testimonials.length === 0) return;
     const interval = setInterval(() => {
       setCurrent(prev => (prev + 1) % testimonials.length);
     }, 6000);
     return () => clearInterval(interval);
-  }, []);
+  }, [testimonials.length]);
 
   const sectionRef = useGsapAnimation((el, gsap, ScrollTrigger) => {
     gsap.from(el.querySelectorAll('.testimonial-anim'), {
@@ -24,6 +26,8 @@ export default function TestimonialCarousel() {
       scrollTrigger: { trigger: el, start: 'top 80%' },
     });
   });
+
+  if (loading || testimonials.length === 0) return null;
 
   const t = testimonials[current];
 

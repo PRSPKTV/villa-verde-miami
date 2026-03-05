@@ -29,7 +29,6 @@ export default function Navbar() {
         }`}
       >
         <nav className="max-w-7xl mx-auto px-4 md:px-8 h-16 md:h-20 flex items-center justify-between">
-          {/* Left — Logo */}
           <Link to="/" className="flex items-center gap-2.5 shrink-0 group">
             <img
               src="https://villaverdemiami.com/wp-content/uploads/2025/03/WhatsApp_Image_2025-03-11_at_00.35.32_c1c8ffc1-removebg-preview.png"
@@ -43,7 +42,6 @@ export default function Navbar() {
             </span>
           </Link>
 
-          {/* Center — Nav Links */}
           <div className="hidden lg:flex items-center gap-8 text-sm font-body font-medium">
             {navLinks.map(link => (
               <NavLink
@@ -71,7 +69,6 @@ export default function Navbar() {
             ))}
           </div>
 
-          {/* Right — Actions */}
           <div className="flex items-center gap-3">
             <Link
               to="/properties"
@@ -100,7 +97,6 @@ export default function Navbar() {
         </nav>
       </header>
 
-      {/* Mobile Menu — rendered outside header to avoid backdrop-blur compositing issues */}
       {mobileOpen && (
         <div className="fixed top-16 left-0 right-0 z-50 lg:hidden bg-white border-t border-verde-100 shadow-elevated">
           <div className="max-w-7xl mx-auto px-4 py-6 flex flex-col gap-1">

@@ -5,16 +5,26 @@ const AuthContext = createContext(null);
 
 export function AuthProvider({ children }) {
   const [user, setUser] = useState(null);
+  const [isOwner, setIsOwner] = useState(false);
   const [loading, setLoading] = useState(true);
+
+  const fetchRole = async (userId) => {
+    if (!userId) { setIsOwner(false); return; }
+    const { data } = await supabase.from('user_profiles').select('role').eq('id', userId).single();
+    setIsOwner(data?.role === 'owner');
+  };
 
   useEffect(() => {
     supabase.auth.getSession().then(({ data: { session } }) => {
-      setUser(session?.user ?? null);
-      setLoading(false);
+      const u = session?.user ?? null;
+      setUser(u);
+      fetchRole(u?.id).then(() => setLoading(false));
     });
 
     const { data: { subscription } } = supabase.auth.onAuthStateChange((_event, session) => {
-      setUser(session?.user ?? null);
+      const u = session?.user ?? null;
+      setUser(u);
+      fetchRole(u?.id);
     });
 
     return () => subscription.unsubscribe();
@@ -47,7 +57,7 @@ export function AuthProvider({ children }) {
   };
 
   return (
-    <AuthContext.Provider value={{ user, loading, signUp, signIn, signOut }}>
+    <AuthContext.Provider value={{ user, loading, isOwner, signUp, signIn, signOut }}>
       {children}
     </AuthContext.Provider>
   );

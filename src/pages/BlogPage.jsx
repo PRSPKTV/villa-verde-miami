@@ -1,15 +1,25 @@
 import { useState } from 'react';
 import { PenLine, ArrowRight, Calendar, Clock, Loader2, CheckCircle } from 'lucide-react';
 import { Link } from 'react-router-dom';
-import { blogPosts } from '@/data/blog';
+import { useBlogPosts } from '@/hooks/useBlogPosts';
 import { format, parseISO } from 'date-fns';
 import { subscribeNewsletter } from '@/lib/api';
 
 export default function BlogPage() {
-  const featured = blogPosts[0];
-  const rest = blogPosts.slice(1);
+  const { blogPosts, loading } = useBlogPosts();
   const [nlEmail, setNlEmail] = useState('');
   const [nlStatus, setNlStatus] = useState('idle'); // idle | sending | done | error
+
+  if (loading || blogPosts.length === 0) {
+    return (
+      <div className="pt-32 pb-20 flex items-center justify-center min-h-[60vh]">
+        <div className="animate-spin rounded-full h-8 w-8 border-2 border-verde-500 border-t-transparent" />
+      </div>
+    );
+  }
+
+  const featured = blogPosts[0];
+  const rest = blogPosts.slice(1);
 
   return (
     <div className="pt-28 pb-20 px-4 md:px-8">

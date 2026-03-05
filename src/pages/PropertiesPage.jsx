@@ -1,6 +1,6 @@
 import { useState, useMemo, useRef, useEffect } from 'react';
 import { useSearchParams } from 'react-router-dom';
-import { properties } from '@/data/properties';
+import { useProperties } from '@/hooks/useProperties';
 import PropertyCard from '@/components/properties/PropertyCard';
 import { useGsapAnimation } from '@/hooks/useGsapAnimation';
 import { SlidersHorizontal, X, CalendarDays, Users, Minus, Plus, ChevronDown, Search } from 'lucide-react';
@@ -8,6 +8,7 @@ import { format, startOfMonth, endOfMonth, eachDayOfInterval, getDay, isBefore, 
 import { useBooking } from '@/context/BookingContext';
 
 export default function PropertiesPage() {
+  const { properties, loading } = useProperties();
   const [searchParams] = useSearchParams();
   const { updateSearchParams: updateBookingParams } = useBooking();
   const [guestFilter, setGuestFilter] = useState(parseInt(searchParams.get('guests')) || 0);
@@ -74,7 +75,7 @@ export default function PropertiesPage() {
       if (p.pricing.nightlyRate > priceMax) return false;
       return true;
     });
-  }, [guestFilter, bedroomFilter, priceMax]);
+  }, [properties, guestFilter, bedroomFilter, priceMax]);
 
   const sectionRef = useGsapAnimation((el, gsap, ScrollTrigger) => {
     gsap.from(el.querySelectorAll('.property-card'), {
@@ -158,6 +159,14 @@ export default function PropertiesPage() {
       </div>
     );
   };
+
+  if (loading) {
+    return (
+      <div className="pt-32 pb-20 flex items-center justify-center min-h-[60vh]">
+        <div className="animate-spin rounded-full h-8 w-8 border-2 border-verde-500 border-t-transparent" />
+      </div>
+    );
+  }
 
   return (
     <div className="pt-28 pb-20 px-4 md:px-8 max-w-7xl mx-auto">

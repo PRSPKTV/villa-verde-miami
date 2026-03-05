@@ -1,66 +1,50 @@
 /** @type {import('tailwindcss').Config} */
 export default {
-  content: [
-    "./index.html",
-    "./src/**/*.{js,ts,jsx,tsx}",
-  ],
+  content: ['./index.html', './src/**/*.{js,ts,jsx,tsx}'],
   theme: {
     extend: {
       colors: {
         verde: {
-          50: '#F0F9F4',
-          100: '#D4EDDC',
-          200: '#A3D9B6',
-          300: '#6BBF8A',
-          400: '#2D8B5A',
+          50: '#e7edea',
+          100: '#cedbd5',
+          200: '#9db8ab',
+          300: '#6d9480',
+          400: '#3c7156',
           500: '#0B4D2C',
-          600: '#0A3622',
+          600: '#082B1A',
           700: '#082B1A',
           800: '#0A2416',
-          900: '#061A0F',
+          900: '#081d12',
         },
         cream: {
-          50: '#FFFDF9',
           100: '#FAF6F0',
           200: '#F2ECDF',
           300: '#E8E1D0',
-          400: '#D9CEB5',
         },
         gold: {
-          300: '#E0C872',
-          400: '#D4B84A',
+          400: '#d4b970',
           500: '#C9A84C',
           600: '#B8943D',
-          700: '#9A7B2F',
         },
         terracotta: {
-          300: '#D4886A',
-          400: '#C47252',
-          500: '#B85C3A',
-          600: '#9E4A2E',
+          500: '#C75B39',
         },
-        primary: '#0B4D2C',
-        accent: '#C9A84C',
         background: '#FAF6F0',
-        surface: '#FFFFFF',
-        'text-primary': '#0A2416',
-        'text-secondary': '#3A5A3F',
-        'text-muted': '#6B8A72',
       },
       fontFamily: {
-        heading: ['"Cormorant Garamond"', 'serif'],
-        body: ['"DM Sans"', 'sans-serif'],
-        data: ['"JetBrains Mono"', 'monospace'],
+        heading: ['Cormorant Garamond', 'Georgia', 'Times New Roman', 'serif'],
+        body: ['DM Sans', 'Helvetica Neue', 'Arial', 'sans-serif'],
+        data: ['JetBrains Mono', 'monospace'],
+      },
+      boxShadow: {
+        tropical: '0 4px 24px rgba(0, 0, 0, 0.06)',
+        card: '0 1px 8px rgba(0, 0, 0, 0.04)',
+        elevated: '0 8px 40px rgba(0, 0, 0, 0.08)',
       },
       borderRadius: {
         organic: '2rem',
       },
-      boxShadow: {
-        tropical: '0 4px 30px rgba(10, 54, 34, 0.08)',
-        card: '0 2px 20px rgba(10, 54, 34, 0.06)',
-        elevated: '0 8px 40px rgba(10, 54, 34, 0.12)',
-      },
     },
   },
   plugins: [],
-}
+};

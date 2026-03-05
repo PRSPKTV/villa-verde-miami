@@ -11,9 +11,7 @@ export default function UserMenu({ variant = 'light' }) {
 
   useEffect(() => {
     const handleClickOutside = (e) => {
-      if (menuRef.current && !menuRef.current.contains(e.target)) {
-        setOpen(false);
-      }
+      if (menuRef.current && !menuRef.current.contains(e.target)) setOpen(false);
     };
     document.addEventListener('mousedown', handleClickOutside);
     return () => document.removeEventListener('mousedown', handleClickOutside);
@@ -46,7 +44,7 @@ export default function UserMenu({ variant = 'light' }) {
       </button>
 
       {open && (
-        <div className="absolute right-0 top-14 w-56 bg-surface rounded-2xl shadow-elevated border border-verde-100 overflow-hidden z-50 animate-in fade-in slide-in-from-top-2">
+        <div className="absolute right-0 top-14 w-56 bg-surface rounded-2xl shadow-elevated border border-verde-100 overflow-hidden z-50">
           {user ? (
             <>
               <div className="px-4 py-3 border-b border-verde-100">
@@ -56,52 +54,29 @@ export default function UserMenu({ variant = 'light' }) {
                 <p className="font-body text-xs text-text-muted truncate">{user.email}</p>
               </div>
               <div className="py-2">
-                <Link
-                  to="/my-bookings"
-                  onClick={() => setOpen(false)}
-                  className="flex items-center gap-3 px-4 py-3 text-sm font-body text-verde-700 hover:bg-cream-50 transition-colors"
-                >
+                <Link to="/my-bookings" onClick={() => setOpen(false)} className="flex items-center gap-3 px-4 py-3 text-sm font-body text-verde-700 hover:bg-cream-50 transition-colors">
                   <CalendarCheck size={16} /> My Bookings
                 </Link>
-                <button
-                  onClick={handleSignOut}
-                  className="w-full flex items-center gap-3 px-4 py-3 text-sm font-body text-red-600 hover:bg-red-50 transition-colors"
-                >
+                <button onClick={handleSignOut} className="w-full flex items-center gap-3 px-4 py-3 text-sm font-body text-red-600 hover:bg-red-50 transition-colors">
                   <LogOut size={16} /> Sign Out
                 </button>
               </div>
             </>
           ) : (
             <div className="py-2">
-              <Link
-                to="/login"
-                onClick={() => setOpen(false)}
-                className="flex items-center gap-3 px-4 py-3 text-sm font-body font-semibold text-verde-800 hover:bg-cream-50 transition-colors"
-              >
+              <Link to="/login" onClick={() => setOpen(false)} className="flex items-center gap-3 px-4 py-3 text-sm font-body font-semibold text-verde-800 hover:bg-cream-50 transition-colors">
                 <LogIn size={16} /> Log In
               </Link>
-              <Link
-                to="/signup"
-                onClick={() => setOpen(false)}
-                className="flex items-center gap-3 px-4 py-3 text-sm font-body text-verde-700 hover:bg-cream-50 transition-colors"
-              >
+              <Link to="/signup" onClick={() => setOpen(false)} className="flex items-center gap-3 px-4 py-3 text-sm font-body text-verde-700 hover:bg-cream-50 transition-colors">
                 <UserPlus size={16} /> Sign Up
               </Link>
             </div>
           )}
           <div className="border-t border-verde-100 py-2">
-            <Link
-              to="/faq"
-              onClick={() => setOpen(false)}
-              className="flex items-center gap-3 px-4 py-3 text-sm font-body text-verde-700 hover:bg-cream-50 transition-colors"
-            >
+            <Link to="/faq" onClick={() => setOpen(false)} className="flex items-center gap-3 px-4 py-3 text-sm font-body text-verde-700 hover:bg-cream-50 transition-colors">
               <HelpCircle size={16} /> Help Center
             </Link>
-            <Link
-              to="/about"
-              onClick={() => setOpen(false)}
-              className="flex items-center gap-3 px-4 py-3 text-sm font-body text-verde-700 hover:bg-cream-50 transition-colors"
-            >
+            <Link to="/about" onClick={() => setOpen(false)} className="flex items-center gap-3 px-4 py-3 text-sm font-body text-verde-700 hover:bg-cream-50 transition-colors">
               <Info size={16} /> About Villa Verde
             </Link>
           </div>

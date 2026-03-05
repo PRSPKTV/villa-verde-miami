@@ -1,9 +1,11 @@
 import { useState } from 'react';
 import { useGsapAnimation } from '@/hooks/useGsapAnimation';
+import { useSiteContent } from '@/hooks/useSiteContent';
 import { MapPin, Phone, Mail, Clock, Send, CheckCircle, Loader2 } from 'lucide-react';
 import { sendContactMessage } from '@/lib/api';
 
 export default function ContactPage() {
+  const { content, loading } = useSiteContent('contact');
   const [submitted, setSubmitted] = useState(false);
   const [sending, setSending] = useState(false);
   const [error, setError] = useState('');
@@ -29,116 +31,110 @@ export default function ContactPage() {
     }
   };
 
-  const inputClasses = 'w-full px-4 py-3 rounded-xl border border-verde-200 bg-cream-50 font-body text-sm focus:outline-none focus:ring-2 focus:ring-verde-400 focus:border-transparent transition-all';
+  const handleChange = (e) => setForm(prev => ({ ...prev, [e.target.name]: e.target.value }));
+
+  if (loading) {
+    return (
+      <div className="flex items-center justify-center min-h-screen">
+        <Loader2 size={32} className="animate-spin text-verde-500" />
+      </div>
+    );
+  }
+
+  const phone = content?.phone || '(305) 440-0808';
+  const phoneHref = content?.phone ? `tel:${content.phone.replace(/[^0-9+]/g, '')}` : 'tel:3054400808';
+  const email = content?.email || 'jmordan57@gmail.com';
+  const address = content?.address || '1718 SW 11 St, Miami, FL 33135';
+  const responseTime = content?.responseTime || 'Within an hour';
+  const subjects = content?.subjects || [
+    { value: 'booking', label: 'Booking Inquiry' },
+    { value: 'property', label: 'Property Question' },
+    { value: 'feedback', label: 'Feedback' },
+    { value: 'other', label: 'Other' },
+  ];
 
   return (
-    <div className="pt-28 pb-20 px-4 md:px-8">
-      <div ref={heroRef} className="max-w-4xl mx-auto mb-16">
-        <h1 className="contact-anim font-heading text-4xl md:text-5xl font-bold text-verde-800 mb-4">
-          Get in Touch
-        </h1>
-        <p className="contact-anim text-text-secondary font-body text-lg">
-          Have a question or ready to book? We would love to hear from you.
-        </p>
-      </div>
+    <div>
+      <section ref={heroRef} className="pt-32 pb-16 px-4 md:px-8 bg-verde-800">
+        <div className="max-w-4xl mx-auto text-center">
+          <h1 className="contact-anim font-heading italic text-5xl md:text-7xl font-bold text-cream-100 mb-4">
+            {content?.heroHeading || 'Get in Touch'}
+          </h1>
+          <p className="contact-anim text-cream-200/70 font-body text-lg">
+            {content?.heroSubtitle || 'We would love to hear from you. Send us a message and we will get back to you soon.'}
+          </p>
+        </div>
+      </section>
 
-      <div className="max-w-6xl mx-auto grid lg:grid-cols-2 gap-12">
-        <div className="bg-surface rounded-3xl border border-verde-100 p-8 shadow-card">
-          {submitted ? (
-            <div className="flex flex-col items-center justify-center py-16 text-center">
-              <div className="w-16 h-16 rounded-full bg-verde-100 flex items-center justify-center mb-6">
-                <CheckCircle size={32} className="text-verde-500" />
+      <section className="py-16 px-4 md:px-8 max-w-6xl mx-auto">
+        <div className="grid lg:grid-cols-2 gap-12">
+          <div>
+            {submitted ? (
+              <div className="bg-verde-50 rounded-3xl p-8 text-center">
+                <CheckCircle size={48} className="text-verde-500 mx-auto mb-4" />
+                <h3 className="font-heading text-2xl font-bold text-verde-800 mb-2">Message Sent!</h3>
+                <p className="font-body text-text-secondary">We will get back to you within 24 hours.</p>
+                <button onClick={() => { setSubmitted(false); setForm({ name: '', email: '', subject: '', message: '' }); }} className="mt-4 text-verde-600 font-body font-medium hover:underline">Send another message</button>
               </div>
-              <h3 className="font-heading text-2xl font-bold text-verde-800 mb-3">Message Sent!</h3>
-              <p className="text-text-secondary font-body">We will get back to you within 24 hours.</p>
-              <button
-                onClick={() => { setSubmitted(false); setForm({ name: '', email: '', subject: '', message: '' }); }}
-                className="mt-6 text-verde-500 font-body font-semibold underline"
-              >
-                Send another message
-              </button>
-            </div>
-          ) : (
-            <form onSubmit={handleSubmit} className="space-y-5">
-              <div className="grid sm:grid-cols-2 gap-4">
+            ) : (
+              <form onSubmit={handleSubmit} className="space-y-6">
                 <div>
-                  <label className="block text-sm font-body font-medium text-verde-700 mb-1.5">Name</label>
-                  <input type="text" required value={form.name} onChange={e => setForm({ ...form, name: e.target.value })} className={inputClasses} placeholder="Your name" />
+                  <label className="block font-body text-sm font-medium text-verde-800 mb-2">Name</label>
+                  <input type="text" name="name" value={form.name} onChange={handleChange} required className="w-full px-4 py-3 rounded-xl border border-verde-200 font-body focus:outline-none focus:ring-2 focus:ring-verde-500 bg-surface" />
                 </div>
                 <div>
-                  <label className="block text-sm font-body font-medium text-verde-700 mb-1.5">Email</label>
-                  <input type="email" required value={form.email} onChange={e => setForm({ ...form, email: e.target.value })} className={inputClasses} placeholder="your@email.com" />
+                  <label className="block font-body text-sm font-medium text-verde-800 mb-2">Email</label>
+                  <input type="email" name="email" value={form.email} onChange={handleChange} required className="w-full px-4 py-3 rounded-xl border border-verde-200 font-body focus:outline-none focus:ring-2 focus:ring-verde-500 bg-surface" />
                 </div>
-              </div>
-              <div>
-                <label className="block text-sm font-body font-medium text-verde-700 mb-1.5">Subject</label>
-                <select value={form.subject} onChange={e => setForm({ ...form, subject: e.target.value })} className={inputClasses}>
-                  <option value="">Select a subject</option>
-                  <option value="booking">Booking Inquiry</option>
-                  <option value="property">Property Question</option>
-                  <option value="feedback">Feedback</option>
-                  <option value="other">Other</option>
-                </select>
-              </div>
-              <div>
-                <label className="block text-sm font-body font-medium text-verde-700 mb-1.5">Message</label>
-                <textarea required rows={5} value={form.message} onChange={e => setForm({ ...form, message: e.target.value })} className={inputClasses} placeholder="How can we help?" />
-              </div>
-              {error && (
-                <p className="text-red-600 font-body text-sm">{error}</p>
-              )}
-              <button
-                type="submit"
-                disabled={sending}
-                className="w-full bg-gold-500 text-verde-800 py-3 rounded-xl font-body font-semibold flex items-center justify-center gap-2 hover:bg-gold-400 transition-colors disabled:opacity-60"
-              >
-                {sending ? <><Loader2 size={16} className="animate-spin" /> Sending...</> : <><Send size={16} /> Send Message</>}
-              </button>
-            </form>
-          )}
-        </div>
+                <div>
+                  <label className="block font-body text-sm font-medium text-verde-800 mb-2">Subject</label>
+                  <select name="subject" value={form.subject} onChange={handleChange} className="w-full px-4 py-3 rounded-xl border border-verde-200 font-body focus:outline-none focus:ring-2 focus:ring-verde-500 bg-surface">
+                    <option value="">Select a topic</option>
+                    {subjects.map((subj) => (
+                      <option key={subj.value} value={subj.value}>{subj.label}</option>
+                    ))}
+                  </select>
+                </div>
+                <div>
+                  <label className="block font-body text-sm font-medium text-verde-800 mb-2">Message</label>
+                  <textarea name="message" value={form.message} onChange={handleChange} required rows={5} className="w-full px-4 py-3 rounded-xl border border-verde-200 font-body focus:outline-none focus:ring-2 focus:ring-verde-500 bg-surface resize-none" />
+                </div>
+                {error && <p className="text-red-600 font-body text-sm">{error}</p>}
+                <button type="submit" disabled={sending} className="w-full bg-verde-500 text-cream-100 py-4 rounded-full font-body font-bold text-lg hover:bg-verde-600 transition-colors flex items-center justify-center gap-2 disabled:opacity-50">
+                  {sending ? <><Loader2 size={20} className="animate-spin" /> Sending...</> : <><Send size={18} /> Send Message</>}
+                </button>
+              </form>
+            )}
+          </div>
 
-        <div className="space-y-8">
-          <div className="bg-surface rounded-3xl border border-verde-100 p-8 shadow-card">
-            <h3 className="font-heading text-xl font-bold text-verde-800 mb-6">Contact Information</h3>
-            <div className="space-y-5">
-              {[
-                { icon: Phone, label: 'Phone', value: '(305) 440-0808', href: 'tel:+13054400808' },
-                { icon: Mail, label: 'Email', value: 'jmordan57@gmail.com', href: 'mailto:jmordan57@gmail.com' },
-                { icon: MapPin, label: 'Location', value: '1718 SW 11 St, Miami, FL 33135' },
-                { icon: Clock, label: 'Response Time', value: 'Within an hour' },
-              ].map(({ icon: Icon, label, value, href }) => (
-                <div key={label} className="flex items-start gap-3">
-                  <div className="w-10 h-10 rounded-xl bg-verde-50 flex items-center justify-center shrink-0">
-                    <Icon size={18} className="text-verde-500" />
-                  </div>
-                  <div>
-                    <div className="font-data text-xs uppercase tracking-wider text-text-muted">{label}</div>
-                    {href ? (
-                      <a href={href} className="font-body text-verde-700 hover:text-gold-600 transition-colors">{value}</a>
-                    ) : (
-                      <span className="font-body text-verde-700">{value}</span>
-                    )}
-                  </div>
+          <div className="space-y-8">
+            <div className="bg-cream-200 rounded-3xl p-8">
+              <h3 className="font-heading text-2xl font-bold text-verde-800 mb-6">Contact Information</h3>
+              <div className="space-y-4">
+                <a href={phoneHref} className="flex items-center gap-3 font-body text-verde-700 hover:text-verde-500 transition-colors">
+                  <Phone size={18} className="text-gold-500" /> {phone}
+                </a>
+                <a href={`mailto:${email}`} className="flex items-center gap-3 font-body text-verde-700 hover:text-verde-500 transition-colors">
+                  <Mail size={18} className="text-gold-500" /> {email}
+                </a>
+                <div className="flex items-center gap-3 font-body text-verde-700">
+                  <MapPin size={18} className="text-gold-500" /> {address}
                 </div>
-              ))}
+                <div className="flex items-center gap-3 font-body text-verde-700">
+                  <Clock size={18} className="text-gold-500" /> Response time: {responseTime}
+                </div>
+              </div>
+            </div>
+
+            <div className="rounded-3xl overflow-hidden h-[300px]">
+              <iframe
+                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3593.0!2d-80.2295!3d25.7637!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zMjXCsDQ1JzQ5LjMiTiA4MMKwMTMnNDYuMiJX!5e0!3m2!1sen!2sus!4v1234567890"
+                width="100%" height="100%" style={{ border: 0 }} allowFullScreen loading="lazy" referrerPolicy="no-referrer-when-downgrade"
+              />
             </div>
           </div>
-
-          <div className="rounded-3xl overflow-hidden border border-verde-100 shadow-card h-64">
-            <iframe
-              title="Villa Verde Miami Location"
-              src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d14362.517889204147!2d-80.22!3d25.765!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x88d9b6f0c20a3c7d%3A0x5e5b2e3fce3e6a3c!2sLittle%20Havana%2C%20Miami%2C%20FL!5e0!3m2!1sen!2sus!4v1709000000000!5m2!1sen!2sus"
-              width="100%"
-              height="100%"
-              style={{ border: 0 }}
-              allowFullScreen=""
-              loading="lazy"
-              referrerPolicy="no-referrer-when-downgrade"
-            />
-          </div>
         </div>
-      </div>
+      </section>
     </div>
   );
 }

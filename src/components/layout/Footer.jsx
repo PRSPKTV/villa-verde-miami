@@ -1,25 +1,16 @@
 import { Link } from 'react-router-dom';
-import { MapPin, Phone, Mail, Instagram, Facebook } from 'lucide-react';
+import { MapPin, Phone, Mail } from 'lucide-react';
 import { useGsapAnimation } from '@/hooks/useGsapAnimation';
 
 export default function Footer() {
   const footerRef = useGsapAnimation((el, gsap, ScrollTrigger) => {
     gsap.from(el.querySelectorAll('.footer-anim'), {
-      y: 30,
-      opacity: 0,
-      duration: 1,
-      stagger: 0.1,
-      ease: 'power3.out',
-      scrollTrigger: {
-        trigger: el,
-        start: 'top 95%',
-      },
+      y: 30, opacity: 0, duration: 1, stagger: 0.1, ease: 'power3.out',
+      scrollTrigger: { trigger: el, start: 'top 95%' },
       onComplete: () => {
         gsap.set(el.querySelectorAll('.footer-anim'), { clearProps: 'opacity,transform' });
       },
     });
-
-    // Fallback: ensure footer is visible after a short delay regardless of scroll
     gsap.delayedCall(1.5, () => {
       gsap.set(el.querySelectorAll('.footer-anim'), { opacity: 1, y: 0 });
     });
@@ -55,7 +46,7 @@ export default function Footer() {
             Little Havana's tranquil oasis. Luxury short-term rentals curated with tropical elegance in the heart of Miami.
           </p>
           <div className="flex flex-col gap-3 text-sm text-cream-200/70">
-            <a href="tel:+13054400808" className="flex items-center gap-2 hover:text-gold-500 transition-colors">
+            <a href="tel:3054400808" className="flex items-center gap-2 hover:text-gold-500 transition-colors">
               <Phone size={14} /> (305) 440-0808
             </a>
             <a href="mailto:jmordan57@gmail.com" className="flex items-center gap-2 hover:text-gold-500 transition-colors">
@@ -81,17 +72,7 @@ export default function Footer() {
           <Link to="/legal/terms-of-service" className="text-cream-200/70 hover:text-gold-500 transition-colors">Terms of Service</Link>
           <Link to="/legal/cancellation-policy" className="text-cream-200/70 hover:text-gold-500 transition-colors">Cancellation Policy</Link>
           <Link to="/legal/house-rules" className="text-cream-200/70 hover:text-gold-500 transition-colors">House Rules</Link>
-          <div className="flex gap-4 mt-4">
-            <a href="https://www.instagram.com/villaverdemiami/" target="_blank" rel="noopener noreferrer" className="text-cream-200/50 hover:text-gold-500 transition-colors" aria-label="Instagram">
-              <Instagram size={20} />
-            </a>
-            <a href="https://www.facebook.com/share/14aq5WKrdB/" target="_blank" rel="noopener noreferrer" className="text-cream-200/50 hover:text-gold-500 transition-colors" aria-label="Facebook">
-              <Facebook size={20} />
-            </a>
-            <a href="https://www.tiktok.com/@villaverdemiami" target="_blank" rel="noopener noreferrer" className="text-cream-200/50 hover:text-gold-500 transition-colors" aria-label="TikTok">
-              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M9 12a4 4 0 1 0 4 4V4a5 5 0 0 0 5 5" /></svg>
-            </a>
-          </div>
+
         </div>
       </div>
 

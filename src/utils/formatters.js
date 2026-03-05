@@ -7,19 +7,19 @@ export function formatGuestCount(count) {
 }
 
 export function pluralize(count, singular, plural) {
-  return count === 1 ? `${count} ${singular}` : `${count} ${plural || singular + 's'}`;
+  return count === 1 ? singular : (plural || singular + 's');
 }
 
-export function truncateText(text, maxLength = 120) {
+export function truncateText(text, maxLength = 100) {
   if (text.length <= maxLength) return text;
   return text.slice(0, maxLength).trimEnd() + '...';
 }
 
 export function generateConfirmationId() {
   const chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789';
-  let id = 'VV-';
+  let code = 'VV-';
   for (let i = 0; i < 8; i++) {
-    id += chars.charAt(Math.floor(Math.random() * chars.length));
+    code += chars.charAt(Math.floor(Math.random() * chars.length));
   }
-  return id;
+  return code;
 }
