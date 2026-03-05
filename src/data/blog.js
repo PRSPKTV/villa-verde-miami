@@ -363,7 +363,7 @@ export const blogPosts = [
     category: 'Explore Miami',
     date: '2026-03-05',
     readTime: '5 min read',
-    image: 'https://images.unsplash.com/photo-1533106497176-45ae19e68ba2?w=1200&q=80',
+    image: '/images/neighborhood-guide.jpg',
     excerpt: 'If you like exploring by neighborhood — coffee stops, art, good meals, and walking around — these are the zones we recommend.',
     content: [
       {
@@ -689,7 +689,7 @@ export const blogPosts = [
     category: 'Shopping',
     date: '2026-03-05',
     readTime: '6 min read',
-    image: 'https://images.unsplash.com/photo-1441986300917-64674bd600d8?w=1200&q=80',
+    image: '/images/shopping-guide.webp',
     excerpt: 'Luxury boutiques, massive malls, and unique shopping districts — Miami is one of the best shopping cities in the United States.',
     content: [
       {
