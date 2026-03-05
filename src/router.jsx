@@ -27,6 +27,10 @@ const BookingsManagementPage = lazy(() => import('@/pages/dashboard/BookingsMana
 const ContentManagementPage = lazy(() => import('@/pages/dashboard/ContentManagementPage'));
 const BlogEditorPage = lazy(() => import('@/pages/dashboard/BlogEditorPage'));
 const SettingsPage = lazy(() => import('@/pages/dashboard/SettingsPage'));
+const MessagingPage = lazy(() => import('@/pages/dashboard/MessagingPage'));
+const MessageTemplatesPage = lazy(() => import('@/pages/dashboard/MessageTemplatesPage'));
+const GuidebookPage = lazy(() => import('@/pages/dashboard/GuidebookPage'));
+const RevenuePage = lazy(() => import('@/pages/dashboard/RevenuePage'));
 
 function DashboardFallback() {
   return (
@@ -74,6 +78,10 @@ export const router = createBrowserRouter([
       { path: 'bookings', element: <Suspense fallback={<DashboardFallback />}><BookingsManagementPage /></Suspense> },
       { path: 'content', element: <Suspense fallback={<DashboardFallback />}><ContentManagementPage /></Suspense> },
       { path: 'content/blog/:id', element: <Suspense fallback={<DashboardFallback />}><BlogEditorPage /></Suspense> },
+      { path: 'messages', element: <Suspense fallback={<DashboardFallback />}><MessagingPage /></Suspense> },
+      { path: 'messages/templates', element: <Suspense fallback={<DashboardFallback />}><MessageTemplatesPage /></Suspense> },
+      { path: 'guidebook', element: <Suspense fallback={<DashboardFallback />}><GuidebookPage /></Suspense> },
+      { path: 'revenue', element: <Suspense fallback={<DashboardFallback />}><RevenuePage /></Suspense> },
       { path: 'settings', element: <Suspense fallback={<DashboardFallback />}><SettingsPage /></Suspense> },
     ],
   },

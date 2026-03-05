@@ -1,13 +1,13 @@
 import { useState, useRef, useEffect } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
-import { Menu, User, LogIn, UserPlus, LogOut, HelpCircle, Info, CalendarCheck } from 'lucide-react';
+import { Menu, User, LogIn, UserPlus, LogOut, HelpCircle, Info, CalendarCheck, LayoutDashboard } from 'lucide-react';
 import { useAuth } from '@/context/AuthContext';
 
 export default function UserMenu({ variant = 'light' }) {
   const [open, setOpen] = useState(false);
   const menuRef = useRef(null);
   const navigate = useNavigate();
-  const { user, signOut } = useAuth();
+  const { user, isOwner, signOut } = useAuth();
 
   useEffect(() => {
     const handleClickOutside = (e) => {
@@ -54,6 +54,11 @@ export default function UserMenu({ variant = 'light' }) {
                 <p className="font-body text-xs text-text-muted truncate">{user.email}</p>
               </div>
               <div className="py-2">
+                {isOwner && (
+                  <Link to="/dashboard" onClick={() => setOpen(false)} className="flex items-center gap-3 px-4 py-3 text-sm font-body font-semibold text-verde-800 hover:bg-cream-50 transition-colors">
+                    <LayoutDashboard size={16} /> Owner Dashboard
+                  </Link>
+                )}
                 <Link to="/my-bookings" onClick={() => setOpen(false)} className="flex items-center gap-3 px-4 py-3 text-sm font-body text-verde-700 hover:bg-cream-50 transition-colors">
                   <CalendarCheck size={16} /> My Bookings
                 </Link>
