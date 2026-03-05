@@ -24,7 +24,7 @@ export default function PropertiesPage() {
     const co = searchParams.get('checkOut');
     return co ? new Date(co + 'T12:00:00') : null;
   });
-  const [guests, setGuests] = useState(parseInt(searchParams.get('guests')) || 2);
+  const [guests, setGuests] = useState(parseInt(searchParams.get('guests')) || 0);
   const [activeField, setActiveField] = useState(null);
   const [calendarMonth, setCalendarMonth] = useState(checkIn || new Date());
   const dateBarRef = useRef(null);
@@ -217,8 +217,8 @@ export default function PropertiesPage() {
             <Users size={18} className="text-verde-400 shrink-0" />
             <div className="text-left">
               <div className="font-data text-[11px] uppercase tracking-wider text-text-muted">Guests</div>
-              <div className="font-body text-sm font-medium text-verde-800">
-                {guests} {guests === 1 ? 'guest' : 'guests'}
+              <div className={`font-body text-sm font-medium ${guests === 0 ? 'text-text-muted' : 'text-verde-800'}`}>
+                {guests === 0 ? 'Add guests' : `${guests} ${guests === 1 ? 'guest' : 'guests'}`}
               </div>
             </div>
           </button>
@@ -254,9 +254,9 @@ export default function PropertiesPage() {
               </div>
               <div className="flex items-center gap-3">
                 <button
-                  onClick={() => setGuests(Math.max(1, guests - 1))}
+                  onClick={() => setGuests(Math.max(0, guests - 1))}
                   className="w-8 h-8 rounded-full border border-verde-200 flex items-center justify-center text-verde-600 hover:border-verde-400 transition-colors disabled:opacity-30"
-                  disabled={guests <= 1}
+                  disabled={guests <= 0}
                 >
                   <Minus size={14} />
                 </button>

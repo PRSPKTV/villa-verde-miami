@@ -12,7 +12,7 @@ export default function BookingSearchBar() {
   const [selectedProperty, setSelectedProperty] = useState('all');
   const [checkIn, setCheckIn] = useState(null);
   const [checkOut, setCheckOut] = useState(null);
-  const [guests, setGuests] = useState(2);
+  const [guests, setGuests] = useState(0);
   const [calendarMonth, setCalendarMonth] = useState(new Date());
   const barRef = useRef(null);
 
@@ -200,8 +200,8 @@ export default function BookingSearchBar() {
           <Users size={20} className="text-verde-400 shrink-0 hidden sm:block" />
           <div className="text-left">
             <div className="font-data text-[12px] uppercase tracking-wider text-text-muted">Guests</div>
-            <div className="font-body text-lg font-medium text-verde-800">
-              {guests} {guests === 1 ? 'guest' : 'guests'}
+            <div className={`font-body text-lg font-medium ${guests === 0 ? 'text-text-muted' : 'text-verde-800'}`}>
+              {guests === 0 ? 'Add guests' : `${guests} ${guests === 1 ? 'guest' : 'guests'}`}
             </div>
           </div>
         </button>
@@ -210,7 +210,8 @@ export default function BookingSearchBar() {
         <div className="flex items-center pr-2.5">
           <button
             onClick={handleSearch}
-            className="bg-gold-500 hover:bg-gold-400 text-verde-800 rounded-full w-14 h-14 md:w-16 md:h-16 flex items-center justify-center transition-all hover:scale-105 active:scale-95 shadow-tropical"
+            disabled={guests === 0}
+            className="bg-gold-500 hover:bg-gold-400 text-verde-800 rounded-full w-14 h-14 md:w-16 md:h-16 flex items-center justify-center transition-all hover:scale-105 active:scale-95 shadow-tropical disabled:opacity-40 disabled:cursor-not-allowed disabled:hover:scale-100"
           >
             <Search size={22} />
           </button>
@@ -260,9 +261,9 @@ export default function BookingSearchBar() {
             </div>
             <div className="flex items-center gap-3">
               <button
-                onClick={() => setGuests(Math.max(1, guests - 1))}
+                onClick={() => setGuests(Math.max(0, guests - 1))}
                 className="w-8 h-8 rounded-full border border-verde-200 flex items-center justify-center text-verde-600 hover:border-verde-400 transition-colors disabled:opacity-30"
-                disabled={guests <= 1}
+                disabled={guests <= 0}
               >
                 <Minus size={14} />
               </button>
@@ -334,14 +335,14 @@ export default function BookingSearchBar() {
               <Users size={18} className="text-verde-400 shrink-0" />
               <div>
                 <div className="font-data text-[11px] uppercase tracking-wider text-text-muted">Guests</div>
-                <div className="font-body text-sm font-medium text-verde-800">{guests} {guests === 1 ? 'guest' : 'guests'}</div>
+                <div className={`font-body text-sm font-medium ${guests === 0 ? 'text-text-muted' : 'text-verde-800'}`}>{guests === 0 ? 'Add guests' : `${guests} ${guests === 1 ? 'guest' : 'guests'}`}</div>
               </div>
             </div>
             <div className="flex items-center gap-3">
               <button
-                onClick={() => setGuests(Math.max(1, guests - 1))}
+                onClick={() => setGuests(Math.max(0, guests - 1))}
                 className="w-8 h-8 rounded-full border border-verde-200 flex items-center justify-center text-verde-600 disabled:opacity-30"
-                disabled={guests <= 1}
+                disabled={guests <= 0}
               >
                 <Minus size={14} />
               </button>
@@ -360,9 +361,10 @@ export default function BookingSearchBar() {
           <div className="p-4">
             <button
               onClick={handleSearch}
-              className="w-full bg-gold-500 hover:bg-gold-400 text-verde-800 rounded-xl py-3.5 font-body font-semibold flex items-center justify-center gap-2 transition-colors shadow-tropical"
+              disabled={guests === 0}
+              className="w-full bg-gold-500 hover:bg-gold-400 text-verde-800 rounded-xl py-3.5 font-body font-semibold flex items-center justify-center gap-2 transition-colors shadow-tropical disabled:opacity-40 disabled:cursor-not-allowed"
             >
-              <Search size={18} /> Search Properties
+              <Search size={18} /> {guests === 0 ? 'Select number of guests' : 'Search Properties'}
             </button>
           </div>
         </div>

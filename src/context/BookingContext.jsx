@@ -8,7 +8,7 @@ export function BookingProvider({ children }) {
   const [searchParams, setSearchParams] = useState({
     checkIn: null,
     checkOut: null,
-    guests: 2,
+    guests: 0,
   });
 
   const [selectedProperty, setSelectedProperty] = useState(null);
@@ -42,7 +42,7 @@ export function BookingProvider({ children }) {
   }, []);
 
   const resetBooking = useCallback(() => {
-    setSearchParams({ checkIn: null, checkOut: null, guests: 2 });
+    setSearchParams({ checkIn: null, checkOut: null, guests: 0 });
     setSelectedProperty(null);
     setGuestDetails({ firstName: '', lastName: '', email: '', phone: '', specialRequests: '' });
     setPricing(null);

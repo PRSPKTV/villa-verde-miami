@@ -76,7 +76,7 @@ export default function PropertyDetailPage() {
 
   const handleBooking = (e) => {
     e.preventDefault();
-    if (!property || !checkIn || !checkOut || !pricing) return;
+    if (!property || !checkIn || !checkOut || !pricing || guests < 1) return;
     updateSearchParams({ checkIn, checkOut, guests });
     setSelectedProperty(property);
     updateGuestDetails(form);
@@ -290,6 +290,7 @@ export default function PropertyDetailPage() {
                     onChange={(e) => setGuests(parseInt(e.target.value))}
                     className="w-full px-4 py-2.5 rounded-xl border border-verde-200 bg-cream-50 font-body text-sm focus:outline-none focus:ring-2 focus:ring-verde-400"
                   >
+                    <option value={0}>Select guests</option>
                     {Array.from({ length: property.details.maxGuests }, (_, i) => i + 1).map(n => (
                       <option key={n} value={n}>{n} {n === 1 ? 'guest' : 'guests'}</option>
                     ))}
