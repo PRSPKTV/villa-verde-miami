@@ -5,7 +5,7 @@ export const blogPosts = [
     category: 'Neighborhood',
     date: '2026-02-15',
     readTime: '8 min read',
-    image: 'https://a0.muscache.com/im/pictures/hosting/Hosting-798758485935620006/original/9280c950-e46f-439e-8c19-8026b2a963a8.jpeg',
+    image: 'https://images.unsplash.com/photo-1547995886-6dc09384c6e6?w=1200&q=80',
     excerpt: 'Discover the hidden gems, best restaurants, and cultural experiences that make Little Havana one of Miami\'s most beloved neighborhoods.',
     content: [
       {
@@ -64,7 +64,7 @@ export const blogPosts = [
     category: 'Travel Tips',
     date: '2026-02-28',
     readTime: '6 min read',
-    image: 'https://a0.muscache.com/im/pictures/hosting/Hosting-1566697701396201957/original/88f932c3-e9ce-4acf-a731-afc61c7dd5aa.jpeg',
+    image: 'https://images.unsplash.com/photo-1533106497176-45ae19e68ba2?w=1200&q=80',
     excerpt: 'From Calle Ocho\'s vibrant art scene to the best Cuban coffee spots, here are our top picks for things to do during your stay.',
     content: [
       {
@@ -159,7 +159,7 @@ export const blogPosts = [
     category: 'Booking',
     date: '2026-03-01',
     readTime: '4 min read',
-    image: 'https://a0.muscache.com/im/pictures/miso/Hosting-1127519896882361213/original/ef4d879b-1c20-4ad8-b686-4dacc4ffcf5c.jpeg',
+    image: 'https://images.unsplash.com/photo-1582719478250-c89cae4dc85b?w=1200&q=80',
     excerpt: 'Learn how booking directly with Villa Verde gives you better rates, more flexibility, and a personalized guest experience.',
     content: [
       {
@@ -222,7 +222,7 @@ export const blogPosts = [
     category: 'Travel Tips',
     date: '2026-03-03',
     readTime: '7 min read',
-    image: 'https://a0.muscache.com/im/pictures/miso/Hosting-924140366096705315/original/a136a51b-f212-424e-9c29-d5bb1c5f21fc.jpeg',
+    image: 'https://images.unsplash.com/photo-1514214246283-d427a95c5d2f?w=1200&q=80',
     excerpt: 'Three days, one incredible city. Our curated weekend guide covers Little Havana, the beaches, Wynwood, and more.',
     content: [
       {
@@ -269,7 +269,7 @@ export const blogPosts = [
     category: 'Food & Drink',
     date: '2026-02-20',
     readTime: '6 min read',
-    image: 'https://a0.muscache.com/im/pictures/1efb2a11-9b7a-41a7-b466-950e32f3dbad.jpg',
+    image: 'https://images.unsplash.com/photo-1504674900247-0877df9cc836?w=1200&q=80',
     excerpt: 'From ventanita coffee to late-night ropa vieja — your guide to eating your way through Little Havana like a local.',
     content: [
       {
@@ -316,7 +316,7 @@ export const blogPosts = [
     category: 'Guest Guide',
     date: '2026-03-05',
     readTime: '3 min read',
-    image: 'https://a0.muscache.com/im/pictures/miso/Hosting-924140366096705315/original/a136a51b-f212-424e-9c29-d5bb1c5f21fc.jpeg',
+    image: 'https://images.unsplash.com/photo-1553062407-98eeb64c6a62?w=1200&q=80',
     excerpt: 'Everything you need (and don\'t need) for the perfect Little Havana getaway. Our packing checklist for Miami stays.',
     content: [
       {
