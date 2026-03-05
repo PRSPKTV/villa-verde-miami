@@ -64,7 +64,7 @@ export const blogPosts = [
     category: 'Travel Tips',
     date: '2026-02-28',
     readTime: '6 min read',
-    image: 'https://images.unsplash.com/photo-1533106497176-45ae19e68ba2?w=1200&q=80',
+    image: '/images/little-havana-guide.jpg',
     excerpt: 'From Calle Ocho\'s vibrant art scene to the best Cuban coffee spots, here are our top picks for things to do during your stay.',
     content: [
       {
