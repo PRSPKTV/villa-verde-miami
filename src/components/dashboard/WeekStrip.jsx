@@ -1,4 +1,4 @@
-import { format, startOfWeek, addDays, isSameDay, isToday } from 'date-fns';
+import { format, startOfWeek, addDays, isToday } from 'date-fns';
 
 export default function WeekStrip({ upcomingBookings }) {
   const weekStart = startOfWeek(new Date(), { weekStartsOn: 1 });

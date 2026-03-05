@@ -7,8 +7,6 @@ import {
   Trash2,
   Copy,
   Check,
-  ChevronDown,
-  ChevronUp,
   ExternalLink,
   Globe,
   AlertCircle,

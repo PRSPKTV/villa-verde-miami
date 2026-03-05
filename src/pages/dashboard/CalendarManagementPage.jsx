@@ -8,8 +8,9 @@ import { usePricingMutations } from '@/hooks/usePricingMutations';
 import CalendarDayCell from '@/components/dashboard/CalendarDayCell';
 import CalendarPricingPanel from '@/components/dashboard/CalendarPricingPanel';
 import PricingRulesManager from '@/components/dashboard/PricingRulesManager';
+import IcalConnectionsManager from '@/components/dashboard/IcalConnectionsManager';
 import { format, startOfMonth, endOfMonth, eachDayOfInterval, getDay, addMonths, subMonths, isBefore, isToday, isSameDay } from 'date-fns';
-import { ChevronLeft, ChevronRight, RefreshCw, Lock, Unlock, DollarSign, CalendarDays } from 'lucide-react';
+import { ChevronLeft, ChevronRight, RefreshCw, Lock, Unlock, DollarSign, CalendarDays, Link2 } from 'lucide-react';
 
 export default function CalendarManagementPage() {
   const { properties } = useProperties();
@@ -202,11 +203,16 @@ export default function CalendarManagementPage() {
           <button onClick={() => setActiveTab('rules')} className={`flex items-center gap-1.5 px-3 py-1.5 rounded-lg font-body text-sm transition-colors ${activeTab === 'rules' ? 'bg-verde-500 text-cream-100 font-semibold' : 'text-verde-700 hover:bg-verde-50'}`}>
             <DollarSign size={14} /> Pricing Rules
           </button>
+          <button onClick={() => setActiveTab('connections')} className={`flex items-center gap-1.5 px-3 py-1.5 rounded-lg font-body text-sm transition-colors ${activeTab === 'connections' ? 'bg-verde-500 text-cream-100 font-semibold' : 'text-verde-700 hover:bg-verde-50'}`}>
+            <Link2 size={14} /> Connections
+          </button>
         </div>
       </div>
 
       {activeTab === 'rules' ? (
         <PricingRulesManager rules={rules} onCreate={handleRuleCreate} onUpdate={handleRuleUpdate} onDelete={handleRuleDelete} />
+      ) : activeTab === 'connections' ? (
+        <IcalConnectionsManager propertySlug={selectedSlug} />
       ) : (
         <div className="flex gap-6">
           {/* Calendar Grid */}
