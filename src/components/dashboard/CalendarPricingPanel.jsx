@@ -1,8 +1,8 @@
 import { useState, useEffect } from 'react';
 import { format } from 'date-fns';
-import { X, DollarSign, Moon, StickyNote, Trash2 } from 'lucide-react';
+import { X, DollarSign, Moon, StickyNote, Trash2, TrendingUp } from 'lucide-react';
 
-export default function CalendarPricingPanel({ selectedDates, pricingData, basePrice, onSave, onClear, onClose }) {
+export default function CalendarPricingPanel({ selectedDates, pricingData, basePrice, marketRate, recommendedBasePrice, onSave, onClear, onClose }) {
   const [customPrice, setCustomPrice] = useState('');
   const [minimumStay, setMinimumStay] = useState('');
   const [notes, setNotes] = useState('');
@@ -44,6 +44,12 @@ export default function CalendarPricingPanel({ selectedDates, pricingData, baseP
     setSaving(false);
   };
 
+  const handleApplyMarketRate = () => {
+    if (marketRate?.p50_price) {
+      setCustomPrice((marketRate.p50_price / 100).toFixed(0));
+    }
+  };
+
   const dateLabel = isSingle
     ? format(selectedDates[0], 'EEEE, MMM d, yyyy')
     : `${format(selectedDates[0], 'MMM d')} — ${format(selectedDates[selectedDates.length - 1], 'MMM d')} (${selectedDates.length} nights)`;
@@ -56,6 +62,52 @@ export default function CalendarPricingPanel({ selectedDates, pricingData, baseP
       </div>
 
       <p className="font-body text-sm text-verde-600 font-medium mb-4">{dateLabel}</p>
+
+      {/* Market Data Section */}
+      {marketRate && (
+        <div className="mb-4 bg-gold-50 border border-gold-200 rounded-xl p-3 space-y-2">
+          <div className="flex items-center gap-1.5 mb-1">
+            <TrendingUp size={14} className="text-gold-600" />
+            <span className="font-data text-[10px] uppercase tracking-wider text-gold-700 font-semibold">Market Data</span>
+          </div>
+          <div className="grid grid-cols-2 gap-2">
+            <div>
+              <p className="font-data text-[10px] text-gold-600">Median Rate</p>
+              <p className="font-data text-sm font-bold text-gold-800">
+                ${(marketRate.p50_price / 100).toFixed(0)}
+              </p>
+            </div>
+            <div>
+              <p className="font-data text-[10px] text-gold-600">25th–75th</p>
+              <p className="font-data text-sm font-bold text-gold-800">
+                ${(marketRate.p25_price / 100).toFixed(0)}–${(marketRate.p75_price / 100).toFixed(0)}
+              </p>
+            </div>
+            {marketRate.occupancy_rate != null && (
+              <div>
+                <p className="font-data text-[10px] text-gold-600">Market Occ.</p>
+                <p className="font-data text-sm font-bold text-gold-800">
+                  {(marketRate.occupancy_rate * 100).toFixed(0)}%
+                </p>
+              </div>
+            )}
+            {recommendedBasePrice && (
+              <div>
+                <p className="font-data text-[10px] text-gold-600">PL Rec. Base</p>
+                <p className="font-data text-sm font-bold text-gold-800">
+                  ${(recommendedBasePrice / 100).toFixed(0)}
+                </p>
+              </div>
+            )}
+          </div>
+          <button
+            onClick={handleApplyMarketRate}
+            className="w-full mt-1 px-3 py-1.5 bg-gold-200 text-gold-800 rounded-lg font-body text-xs font-semibold hover:bg-gold-300 transition-colors"
+          >
+            Apply Market Rate (${(marketRate.p50_price / 100).toFixed(0)})
+          </button>
+        </div>
+      )}
 
       <div className="space-y-4">
         <div>

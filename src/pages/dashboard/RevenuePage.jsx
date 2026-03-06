@@ -14,9 +14,13 @@ import { Loader2 } from 'lucide-react';
 
 import useRevenue from '@/hooks/useRevenue';
 import { useProperties } from '@/hooks/useProperties';
+import { usePriceLabsNeighborhood } from '@/hooks/usePriceLabsNeighborhood';
+import { usePriceLabsMarketKPI } from '@/hooks/usePriceLabsMarketKPI';
 import RevenueKPICards from '@/components/dashboard/RevenueKPICards';
 import RevenueChart from '@/components/dashboard/RevenueChart';
 import RevenueTable from '@/components/dashboard/RevenueTable';
+import MarketKPICards from '@/components/dashboard/MarketKPICards';
+import MarketComparisonChart from '@/components/dashboard/MarketComparisonChart';
 import { generateCSV, downloadCSV } from '@/utils/csvExport';
 
 // ── Period presets ────────────────────────────────────────────────
@@ -59,6 +63,12 @@ const CHART_TYPES = [
   { key: 'avgRate', label: 'Avg Rate' },
 ];
 
+const VIEW_TABS = [
+  { key: 'your-data', label: 'Your Data' },
+  { key: 'market', label: 'Market Intelligence' },
+  { key: 'comparison', label: 'Comparison' },
+];
+
 // ── Page Component ───────────────────────────────────────────────
 
 export default function RevenuePage() {
@@ -66,10 +76,23 @@ export default function RevenuePage() {
   const [propertySlug, setPropertySlug] = useState(null);
   const [showYoY, setShowYoY] = useState(false);
   const [chartType, setChartType] = useState('revenue');
+  const [viewTab, setViewTab] = useState('your-data');
 
   const dateRange = useMemo(() => getDateRange(period), [period]);
   const { kpis, monthlyData, prevYearData, loading, error } = useRevenue(dateRange, propertySlug);
   const { properties } = useProperties();
+
+  // PriceLabs market data
+  const { data: neighborhoodData, loading: neighborhoodLoading } = usePriceLabsNeighborhood(
+    propertySlug || (properties?.[0]?.slug || null),
+    dateRange.start,
+    dateRange.end
+  );
+  const { data: marketKPI, loading: kpiLoading } = usePriceLabsMarketKPI(
+    propertySlug || (properties?.[0]?.slug || null),
+    dateRange.start,
+    dateRange.end
+  );
 
   // CSV export handler
   const handleExport = () => {
@@ -94,7 +117,26 @@ export default function RevenuePage() {
       {/* Header */}
       <div>
         <h1 className="font-heading text-3xl font-bold text-text-primary">Revenue</h1>
-        <p className="font-body text-sm text-text-muted mt-1">Track financial performance</p>
+        <p className="font-body text-sm text-text-muted mt-1">Track financial performance & market intelligence</p>
+      </div>
+
+      {/* View tabs */}
+      <div className="flex gap-1 bg-cream-50 rounded-xl p-1 border border-verde-100 w-fit">
+        {VIEW_TABS.map((tab) => (
+          <button
+            key={tab.key}
+            onClick={() => setViewTab(tab.key)}
+            className={`px-4 py-2 rounded-lg text-sm font-body font-medium transition-colors ${
+              viewTab === tab.key
+                ? tab.key === 'market' || tab.key === 'comparison'
+                  ? 'bg-gold-500 text-white font-semibold'
+                  : 'bg-verde-500 text-cream-100 font-semibold'
+                : 'text-verde-700 hover:bg-verde-50'
+            }`}
+          >
+            {tab.label}
+          </button>
+        ))}
       </div>
 
       {/* Controls bar */}
@@ -130,20 +172,22 @@ export default function RevenuePage() {
           ))}
         </select>
 
-        {/* YoY toggle */}
-        <label className="flex items-center gap-2 cursor-pointer select-none">
-          <input
-            type="checkbox"
-            checked={showYoY}
-            onChange={(e) => setShowYoY(e.target.checked)}
-            className="w-4 h-4 rounded border-verde-300 text-verde-600 focus:ring-verde-500"
-          />
-          <span className="font-body text-sm text-text-secondary">Year-over-year</span>
-        </label>
+        {/* YoY toggle (only for Your Data tab) */}
+        {viewTab === 'your-data' && (
+          <label className="flex items-center gap-2 cursor-pointer select-none">
+            <input
+              type="checkbox"
+              checked={showYoY}
+              onChange={(e) => setShowYoY(e.target.checked)}
+              className="w-4 h-4 rounded border-verde-300 text-verde-600 focus:ring-verde-500"
+            />
+            <span className="font-body text-sm text-text-secondary">Year-over-year</span>
+          </label>
+        )}
       </div>
 
       {/* Loading / error states */}
-      {loading && (
+      {(loading || (viewTab !== 'your-data' && (neighborhoodLoading || kpiLoading))) && (
         <div className="flex items-center justify-center py-20">
           <Loader2 className="w-8 h-8 text-verde-500 animate-spin" />
         </div>
@@ -155,15 +199,12 @@ export default function RevenuePage() {
         </div>
       )}
 
-      {/* Dashboard content */}
-      {!loading && !error && (
+      {/* ── Your Data Tab ────────────────────────────────────────── */}
+      {viewTab === 'your-data' && !loading && !error && (
         <>
-          {/* KPI Cards */}
           <RevenueKPICards kpis={kpis} />
 
-          {/* Chart section */}
           <div className="bg-surface rounded-2xl border border-verde-100 shadow-card p-6">
-            {/* Chart type tabs */}
             <div className="flex gap-1 mb-6">
               {CHART_TYPES.map((ct) => (
                 <button
@@ -188,8 +229,63 @@ export default function RevenuePage() {
             />
           </div>
 
-          {/* Monthly table */}
           <RevenueTable monthlyData={monthlyData} onExport={handleExport} />
+        </>
+      )}
+
+      {/* ── Market Intelligence Tab ──────────────────────────────── */}
+      {viewTab === 'market' && !neighborhoodLoading && !kpiLoading && (
+        <>
+          {!propertySlug && (
+            <div className="bg-gold-50 border border-gold-200 rounded-xl p-3">
+              <p className="font-body text-sm text-gold-700">Select a specific property above to see its market data. Showing data for your first property.</p>
+            </div>
+          )}
+
+          <MarketKPICards
+            marketKPI={marketKPI}
+            neighborhoodData={neighborhoodData}
+            yourKpis={kpis}
+          />
+
+          <MarketComparisonChart
+            neighborhoodData={neighborhoodData}
+            yourMonthlyData={monthlyData}
+            marketKPI={marketKPI}
+          />
+        </>
+      )}
+
+      {/* ── Comparison Tab ───────────────────────────────────────── */}
+      {viewTab === 'comparison' && !loading && !neighborhoodLoading && !kpiLoading && (
+        <>
+          {!propertySlug && (
+            <div className="bg-gold-50 border border-gold-200 rounded-xl p-3">
+              <p className="font-body text-sm text-gold-700">Select a specific property above for the most accurate comparison.</p>
+            </div>
+          )}
+
+          {/* Side-by-side KPI comparison */}
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+            <div>
+              <h3 className="font-heading text-lg font-bold text-verde-800 mb-3">Your Performance</h3>
+              <RevenueKPICards kpis={kpis} />
+            </div>
+            <div>
+              <h3 className="font-heading text-lg font-bold text-gold-700 mb-3">Market Data</h3>
+              <MarketKPICards
+                marketKPI={marketKPI}
+                neighborhoodData={neighborhoodData}
+                yourKpis={kpis}
+              />
+            </div>
+          </div>
+
+          <MarketComparisonChart
+            neighborhoodData={neighborhoodData}
+            yourMonthlyData={monthlyData}
+            marketKPI={marketKPI}
+          />
         </>
       )}
     </div>

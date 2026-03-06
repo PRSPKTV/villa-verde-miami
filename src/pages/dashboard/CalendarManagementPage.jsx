@@ -5,12 +5,16 @@ import { useCalendarMutations } from '@/hooks/useCalendarMutations';
 import { useCalendarPricing } from '@/hooks/useCalendarPricing';
 import { usePricingRules } from '@/hooks/usePricingRules';
 import { usePricingMutations } from '@/hooks/usePricingMutations';
+import { usePriceLabsNeighborhood } from '@/hooks/usePriceLabsNeighborhood';
+import { usePriceLabsListings } from '@/hooks/usePriceLabsListings';
+import { applyMarketPrices } from '@/hooks/usePriceLabsMutations';
 import CalendarDayCell from '@/components/dashboard/CalendarDayCell';
 import CalendarPricingPanel from '@/components/dashboard/CalendarPricingPanel';
 import PricingRulesManager from '@/components/dashboard/PricingRulesManager';
 import IcalConnectionsManager from '@/components/dashboard/IcalConnectionsManager';
+import PriceLabsConnectionManager from '@/components/dashboard/PriceLabsConnectionManager';
 import { format, startOfMonth, endOfMonth, eachDayOfInterval, getDay, addMonths, subMonths, isBefore, isToday, isSameDay } from 'date-fns';
-import { ChevronLeft, ChevronRight, RefreshCw, Lock, Unlock, DollarSign, CalendarDays, Link2 } from 'lucide-react';
+import { ChevronLeft, ChevronRight, RefreshCw, Lock, Unlock, DollarSign, CalendarDays, Link2, TrendingUp } from 'lucide-react';
 
 export default function CalendarManagementPage() {
   const { properties } = useProperties();
@@ -24,6 +28,7 @@ export default function CalendarManagementPage() {
   const [loading, setLoading] = useState(false);
   const [syncing, setSyncing] = useState(false);
   const [activeTab, setActiveTab] = useState('calendar');
+  const [applyingMarket, setApplyingMarket] = useState(false);
 
   // Selection state
   const [selectionStart, setSelectionStart] = useState(null);
@@ -37,10 +42,30 @@ export default function CalendarManagementPage() {
   const { pricingData, refetch: refetchPricing } = useCalendarPricing(selectedSlug, monthStart, monthEnd);
   const { rules, refetch: refetchRules } = usePricingRules(selectedSlug);
 
+  // PriceLabs data
+  const { data: neighborhoodData } = usePriceLabsNeighborhood(selectedSlug, monthStart, monthEnd);
+  const { listings: plListings } = usePriceLabsListings();
+
   const selectedProperty = properties.find(p => p.slug === selectedSlug);
   const basePrice = selectedProperty?.pricing?.nightlyRate
     ? Math.round(selectedProperty.pricing.nightlyRate * 100)
     : null;
+
+  // Find the PriceLabs listing for current property
+  const plListing = plListings.find(l => l.property_slug === selectedSlug);
+  const recommendedBasePrice = plListing?.recommended_base_price || null;
+
+  // Build a map of date → neighborhood daily row for quick lookup
+  const marketRateMap = useMemo(() => {
+    const map = {};
+    neighborhoodData.forEach(row => { map[row.date] = row; });
+    return map;
+  }, [neighborhoodData]);
+
+  const getMarketRateForDate = (date) => marketRateMap[format(date, 'yyyy-MM-dd')] || null;
+
+  // Market rate for selected date(s) — use first selected date
+  const selectedMarketRate = selectedDates.length > 0 ? getMarketRateForDate(selectedDates[0]) : null;
 
   // Auto-select first property
   useEffect(() => {
@@ -80,7 +105,6 @@ export default function CalendarManagementPage() {
     if (isBefore(day, new Date()) && !isToday(day)) return;
     if (isBooked(day)) return;
 
-    // If starting a selection
     if (!selectionStart) {
       setSelectionStart(day);
       setSelectionEnd(null);
@@ -89,7 +113,6 @@ export default function CalendarManagementPage() {
       return;
     }
 
-    // If extending selection
     if (selectionStart && !selectionEnd) {
       const start = selectionStart < day ? selectionStart : day;
       const end = selectionStart < day ? day : selectionStart;
@@ -100,7 +123,6 @@ export default function CalendarManagementPage() {
       return;
     }
 
-    // Reset and start new
     setSelectionStart(day);
     setSelectionEnd(null);
     setSelectedDates([day]);
@@ -161,6 +183,20 @@ export default function CalendarManagementPage() {
     } catch { setSyncing(false); }
   };
 
+  const handleApplyMarketRates = async () => {
+    if (!selectedSlug || !neighborhoodData.length) return;
+    if (!confirm('Apply PriceLabs market median rates to all dates this month without a manual price?')) return;
+    setApplyingMarket(true);
+    try {
+      await applyMarketPrices(selectedSlug, monthStart, monthEnd);
+      refetchPricing();
+    } catch (err) {
+      alert('Failed to apply market rates: ' + err.message);
+    } finally {
+      setApplyingMarket(false);
+    }
+  };
+
   const handleRuleCreate = async (data) => {
     await createPricingRule({ ...data, property_slug: selectedSlug });
     refetchRules();
@@ -185,10 +221,22 @@ export default function CalendarManagementPage() {
           <h1 className="font-heading text-3xl font-bold text-verde-800">Calendar</h1>
           <p className="text-text-secondary font-body mt-1">Manage availability, pricing, and blocked dates.</p>
         </div>
-        <button onClick={handleSync} disabled={syncing} className="flex items-center gap-2 px-4 py-2 bg-verde-500 text-cream-100 rounded-xl font-body text-sm font-semibold hover:bg-verde-600 transition-colors disabled:opacity-50">
-          <RefreshCw size={16} className={syncing ? 'animate-spin' : ''} />
-          {syncing ? 'Syncing...' : 'Sync Calendars'}
-        </button>
+        <div className="flex items-center gap-2">
+          {activeTab === 'calendar' && neighborhoodData.length > 0 && (
+            <button
+              onClick={handleApplyMarketRates}
+              disabled={applyingMarket}
+              className="flex items-center gap-2 px-4 py-2 bg-gold-500 text-white rounded-xl font-body text-sm font-semibold hover:bg-gold-600 transition-colors disabled:opacity-50"
+            >
+              <TrendingUp size={16} />
+              {applyingMarket ? 'Applying...' : 'Apply Market Rates'}
+            </button>
+          )}
+          <button onClick={handleSync} disabled={syncing} className="flex items-center gap-2 px-4 py-2 bg-verde-500 text-cream-100 rounded-xl font-body text-sm font-semibold hover:bg-verde-600 transition-colors disabled:opacity-50">
+            <RefreshCw size={16} className={syncing ? 'animate-spin' : ''} />
+            {syncing ? 'Syncing...' : 'Sync Calendars'}
+          </button>
+        </div>
       </div>
 
       {/* Property Selector + Tabs */}
@@ -206,6 +254,9 @@ export default function CalendarManagementPage() {
           <button onClick={() => setActiveTab('connections')} className={`flex items-center gap-1.5 px-3 py-1.5 rounded-lg font-body text-sm transition-colors ${activeTab === 'connections' ? 'bg-verde-500 text-cream-100 font-semibold' : 'text-verde-700 hover:bg-verde-50'}`}>
             <Link2 size={14} /> Connections
           </button>
+          <button onClick={() => setActiveTab('pricelabs')} className={`flex items-center gap-1.5 px-3 py-1.5 rounded-lg font-body text-sm transition-colors ${activeTab === 'pricelabs' ? 'bg-gold-500 text-white font-semibold' : 'text-gold-700 hover:bg-gold-50'}`}>
+            <TrendingUp size={14} /> PriceLabs
+          </button>
         </div>
       </div>
 
@@ -213,6 +264,8 @@ export default function CalendarManagementPage() {
         <PricingRulesManager rules={rules} onCreate={handleRuleCreate} onUpdate={handleRuleUpdate} onDelete={handleRuleDelete} />
       ) : activeTab === 'connections' ? (
         <IcalConnectionsManager propertySlug={selectedSlug} />
+      ) : activeTab === 'pricelabs' ? (
+        <PriceLabsConnectionManager propertySlug={selectedSlug} />
       ) : (
         <div className="flex gap-6">
           {/* Calendar Grid */}
@@ -261,6 +314,7 @@ export default function CalendarManagementPage() {
                     const booking = getBookingForDate(day);
                     const customPricing = getPricingForDate(day);
                     const isSelected = selectedDates.length === 1 && isSameDay(selectedDates[0], day);
+                    const marketRate = getMarketRateForDate(day);
 
                     return (
                       <CalendarDayCell
@@ -272,6 +326,7 @@ export default function CalendarManagementPage() {
                         booking={booking}
                         customPricing={customPricing}
                         basePrice={basePrice}
+                        marketRate={marketRate}
                         isInSelection={isInSelection(day)}
                         isSelected={isSelected}
                         onClick={handleDayClick}
@@ -288,6 +343,7 @@ export default function CalendarManagementPage() {
                 <div className="flex items-center gap-2"><div className="w-3 h-3 rounded bg-gold-100 border border-gold-200" /> <span className="font-body text-xs text-text-muted">Booked</span></div>
                 <div className="flex items-center gap-2"><div className="w-1.5 h-1.5 rounded-full bg-gold-500" /> <span className="font-body text-xs text-text-muted">Has notes</span></div>
                 <div className="flex items-center gap-2"><span className="font-data text-[10px] font-bold text-verde-600">$XX</span> <span className="font-body text-xs text-text-muted">Custom price</span></div>
+                <div className="flex items-center gap-2"><span className="font-data text-[8px] text-gold-600">~$XX mkt</span> <span className="font-body text-xs text-text-muted">Market rate</span></div>
               </div>
             </div>
           </div>
@@ -299,6 +355,8 @@ export default function CalendarManagementPage() {
                 selectedDates={selectedDates}
                 pricingData={pricingData}
                 basePrice={basePrice}
+                marketRate={selectedMarketRate}
+                recommendedBasePrice={recommendedBasePrice}
                 onSave={handlePricingSave}
                 onClear={handlePricingClear}
                 onClose={closePricingPanel}

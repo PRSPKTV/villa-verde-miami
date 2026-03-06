@@ -64,6 +64,10 @@ export async function getMyBookings(email) {
   return data.bookings;
 }
 
+export async function priceLabsAction(action, params = {}) {
+  return supabaseFunction('pricelabs-proxy', { action, ...params });
+}
+
 export async function syncCalendar(slug) {
   const url = slug
     ? `${SUPABASE_URL}/functions/v1/sync-calendar?slug=${encodeURIComponent(slug)}`
