@@ -240,7 +240,7 @@ export default function PropertyDetailPage() {
             <div>
               <h2 className="font-heading text-2xl font-bold text-verde-800 mb-4">House Rules</h2>
               <ul className="grid grid-cols-1 sm:grid-cols-2 gap-2">
-                {property.houseRules.map(rule => (
+                {(property.house_rules || []).map(rule => (
                   <li key={rule} className="flex items-center gap-2 text-text-secondary font-body text-sm py-1">
                     <div className="w-1.5 h-1.5 rounded-full bg-verde-300" />
                     {rule}
