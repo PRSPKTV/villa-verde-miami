@@ -7,7 +7,7 @@ export default function MarketKPICards({ marketKPI, neighborhoodData, yourKpis }
     : null;
 
   const avgOccupancy = neighborhoodData.length > 0
-    ? Math.round(neighborhoodData.reduce((sum, d) => sum + (d.occupancy_rate || 0), 0) / neighborhoodData.length * 100)
+    ? Math.round(neighborhoodData.reduce((sum, d) => sum + (d.occupancy_rate || 0), 0) / neighborhoodData.length)
     : null;
 
   // KPI data from monthly aggregates

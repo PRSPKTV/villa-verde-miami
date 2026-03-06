@@ -19,7 +19,7 @@ export default function PriceLabsConnectionManager({ propertySlug }) {
     setSyncSuccess(null);
     try {
       const result = await syncListings();
-      setSyncSuccess(`Synced ${result.count || 0} listings from PriceLabs`);
+      setSyncSuccess(`Synced ${result.updated || 0} of ${result.total || 0} listings from PriceLabs`);
       refetch();
     } catch (err) {
       setSyncError(err.message);
@@ -34,7 +34,7 @@ export default function PriceLabsConnectionManager({ propertySlug }) {
     setSyncSuccess(null);
     try {
       const result = await syncNeighborhood(slug);
-      setSyncSuccess(`Synced market data: ${result.daily_count || 0} daily records, ${result.kpi_count || 0} KPI records`);
+      setSyncSuccess(`Synced market data: ${result.daily_rows || 0} daily records, ${result.kpi_rows || 0} KPI records`);
       refetch();
     } catch (err) {
       setSyncError(err.message);
@@ -49,7 +49,7 @@ export default function PriceLabsConnectionManager({ propertySlug }) {
     setSyncSuccess(null);
     try {
       const result = await syncAll();
-      setSyncSuccess(`Full sync complete — ${result.listings_count || 0} listings, ${result.neighborhood_results?.length || 0} properties synced`);
+      setSyncSuccess(`Full sync complete — ${result.listings?.updated || 0} listings, ${result.neighborhood?.length || 0} properties synced`);
       refetch();
     } catch (err) {
       setSyncError(err.message);
@@ -177,12 +177,12 @@ export default function PriceLabsConnectionManager({ propertySlug }) {
                   </td>
                   <td className="px-4 py-3 text-right">
                     <span className="font-data text-sm text-text-primary">
-                      {listing.occupancy_next_7 != null ? `${(listing.occupancy_next_7 * 100).toFixed(0)}%` : '—'}
+                      {listing.occupancy_next_7 != null ? `${Math.round(listing.occupancy_next_7)}%` : '—'}
                     </span>
                   </td>
                   <td className="px-4 py-3 text-right">
                     <span className="font-data text-sm text-text-secondary">
-                      {listing.market_occ_next_7 != null ? `${(listing.market_occ_next_7 * 100).toFixed(0)}%` : '—'}
+                      {listing.market_occ_next_7 != null ? `${Math.round(listing.market_occ_next_7)}%` : '—'}
                     </span>
                   </td>
                   <td className="px-4 py-3 text-center">

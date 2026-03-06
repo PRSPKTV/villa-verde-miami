@@ -87,7 +87,7 @@ export default function CalendarPricingPanel({ selectedDates, pricingData, baseP
               <div>
                 <p className="font-data text-[10px] text-gold-600">Market Occ.</p>
                 <p className="font-data text-sm font-bold text-gold-800">
-                  {(marketRate.occupancy_rate * 100).toFixed(0)}%
+                  {Math.round(marketRate.occupancy_rate)}%
                 </p>
               </div>
             )}

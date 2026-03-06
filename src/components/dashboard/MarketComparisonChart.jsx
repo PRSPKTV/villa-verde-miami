@@ -33,8 +33,8 @@ export default function MarketComparisonChart({ neighborhoodData, yourMonthlyDat
   // Build daily occupancy data
   const occData = neighborhoodData.map((d) => ({
     date: format(parseISO(d.date), 'MMM d'),
-    marketOcc: d.occupancy_rate != null ? Math.round(d.occupancy_rate * 100) : null,
-    lastYearOcc: d.occ_last_year != null ? Math.round(d.occ_last_year * 100) : null,
+    marketOcc: d.occupancy_rate != null ? Math.round(d.occupancy_rate) : null,
+    lastYearOcc: d.occ_last_year != null ? Math.round(d.occ_last_year) : null,
   }));
 
   // Monthly revenue comparison — your revenue vs market KPI
