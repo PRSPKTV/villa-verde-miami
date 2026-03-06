@@ -13,7 +13,7 @@ export default function Hero() {
 
       {/* Center Content */}
       <div className="absolute inset-0 z-10 flex flex-col items-center justify-center text-center px-4 md:px-8 pb-24 md:pb-32">
-        <span className="animate-fade-up font-data text-sm md:text-base uppercase tracking-[0.3em] mb-4" style={{ color: '#D4B87A' }}>
+        <span className="animate-fade-up text-base md:text-lg uppercase tracking-[0.35em] font-medium mb-4 drop-shadow-md" style={{ color: 'rgba(232,213,163,0.65)', fontFamily: "'Cormorant Garamond', Georgia, serif", textShadow: '0 0 20px rgba(232,213,163,0.3)' }}>
           Little Havana, Miami
         </span>
 
@@ -26,7 +26,7 @@ export default function Hero() {
           </span>
         </h1>
 
-        <p className="animate-fade-up text-cream-200/80 font-body text-base md:text-lg max-w-xl mb-2 font-medium">
+        <p className="animate-fade-up font-heading text-2xl md:text-3xl max-w-3xl mb-2 font-medium" style={{ color: '#F0EDE8' }}>
           Your tranquil oasis in the heart of Miami. Luxury short-term rentals curated with tropical elegance.
         </p>
 
