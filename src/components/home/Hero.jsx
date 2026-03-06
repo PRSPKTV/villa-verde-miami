@@ -33,11 +33,11 @@ export default function Hero() {
       </div>
 
       <div className="absolute inset-0 z-10 flex flex-col items-center justify-center text-center px-4 md:px-8">
-        <h1 className="flex flex-col items-center gap-1 mb-6">
-          <span className="animate-fade-up font-heading italic font-medium text-2xl md:text-4xl lg:text-5xl tracking-wide text-white">
+        <h1 className="flex flex-col items-center gap-2 mb-5">
+          <span className="animate-fade-up text-2xl md:text-3xl lg:text-4xl font-medium tracking-wide text-white" style={{ fontFamily: "'Playfair Display', Georgia, serif" }}>
             {heading[0]}
           </span>
-          <span className="animate-fade-up font-heading italic font-semibold text-5xl md:text-7xl lg:text-[7rem] leading-[0.95] text-gold-500">
+          <span className="animate-fade-up text-5xl md:text-7xl lg:text-[7rem] font-bold leading-[0.95] text-[#C9A84C]" style={{ fontFamily: "'Playfair Display', Georgia, serif" }}>
             {heading[1]}
           </span>
         </h1>
