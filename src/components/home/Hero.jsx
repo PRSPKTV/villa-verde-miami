@@ -13,15 +13,15 @@ export default function Hero() {
 
       {/* Center Content */}
       <div className="absolute inset-0 z-10 flex flex-col items-center justify-center text-center px-4 md:px-8 pb-24 md:pb-32">
-        <span className="animate-fade-up text-base md:text-lg uppercase tracking-[0.35em] font-medium mb-4 drop-shadow-md" style={{ color: 'rgba(232,213,163,0.65)', fontFamily: "'Cormorant Garamond', Georgia, serif", textShadow: '0 0 20px rgba(232,213,163,0.3)' }}>
+        <span className="animate-fade-up text-base md:text-lg uppercase tracking-[0.35em] font-bold mb-4 drop-shadow-md" style={{ color: '#E2D5B0', fontFamily: "'Cormorant Garamond', Georgia, serif", textShadow: '0 0 20px rgba(226,213,176,0.3)' }}>
           Little Havana, Miami
         </span>
 
         <h1 className="flex flex-col items-center gap-1 mb-6">
-          <span className="animate-fade-up font-heading font-bold text-3xl md:text-5xl lg:text-6xl tracking-tight text-cream-100">
+          <span className="animate-fade-up font-heading font-bold text-4xl md:text-6xl lg:text-7xl tracking-tight text-cream-100">
             Welcome to
           </span>
-          <span className="animate-fade-up font-heading text-5xl md:text-7xl lg:text-[8rem] leading-[0.9]" style={{ color: '#D4B87A' }}>
+          <span className="animate-fade-up font-heading text-6xl md:text-8xl lg:text-[9rem] leading-[0.9]" style={{ color: '#DFC994' }}>
             Villa Verde
           </span>
         </h1>
