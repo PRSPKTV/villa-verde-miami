@@ -13,7 +13,7 @@ export default function Hero() {
 
       {/* Center Content */}
       <div className="absolute inset-0 z-10 flex flex-col items-center justify-center text-center px-4 md:px-8 pb-24 md:pb-32">
-        <span className="animate-fade-up text-base md:text-lg uppercase tracking-[0.35em] font-bold mb-4 drop-shadow-md" style={{ color: '#E2D5B0', fontFamily: "'Cormorant Garamond', Georgia, serif", textShadow: '0 0 20px rgba(226,213,176,0.3)' }}>
+        <span className="animate-fade-up text-sm md:text-base uppercase tracking-[0.35em] font-bold mb-4 drop-shadow-md" style={{ color: '#E2D5B0', fontFamily: "'Cormorant Garamond', Georgia, serif", textShadow: '0 0 20px rgba(226,213,176,0.3)' }}>
           Little Havana, Miami
         </span>
 
