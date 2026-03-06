@@ -30,18 +30,6 @@ export default function Hero() {
           Your tranquil oasis in the heart of Miami. Luxury short-term rentals curated with tropical elegance.
         </p>
 
-        <div className="animate-fade-up flex gap-8 mt-4 mb-2">
-          {[
-            { value: '5.0', label: 'Rating' },
-            { value: '4', label: 'Properties' },
-            { value: '24/7', label: 'Support' },
-          ].map(stat => (
-            <div key={stat.label} className="text-center">
-              <div className="font-data text-xl md:text-2xl font-bold text-gold-500">{stat.value}</div>
-              <div className="font-data text-[10px] uppercase tracking-wider text-cream-200/50">{stat.label}</div>
-            </div>
-          ))}
-        </div>
       </div>
     </section>
   );
