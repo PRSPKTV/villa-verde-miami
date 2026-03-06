@@ -13,7 +13,7 @@ export default function Hero() {
 
       {/* Center Content */}
       <div className="absolute inset-0 z-10 flex flex-col items-center justify-center text-center px-4 md:px-8 pb-24 md:pb-32">
-        <span className="animate-fade-up font-data text-xs md:text-sm uppercase tracking-[0.3em] text-gold-500 mb-4">
+        <span className="animate-fade-up font-data text-sm md:text-base uppercase tracking-[0.3em] mb-4" style={{ color: '#D4B87A' }}>
           Little Havana, Miami
         </span>
 
@@ -21,7 +21,7 @@ export default function Hero() {
           <span className="animate-fade-up font-heading font-bold text-3xl md:text-5xl lg:text-6xl tracking-tight text-cream-100">
             Welcome to
           </span>
-          <span className="animate-fade-up font-heading italic text-5xl md:text-7xl lg:text-[8rem] leading-[0.9] text-gold-500">
+          <span className="animate-fade-up font-heading text-5xl md:text-7xl lg:text-[8rem] leading-[0.9]" style={{ color: '#D4B87A' }}>
             Villa Verde
           </span>
         </h1>
